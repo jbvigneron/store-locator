@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">storelocatorpictime</string>
+    <string name="app_name">StoreLocator</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="title_activity_single_contact">SingleContactActivity</string>
+    <string name="title_activity_data_overview">DataOverviewActivity</string>
+	<string name="url_json">http://infospirit.free.fr/magasins.json</string>
 </resources>
