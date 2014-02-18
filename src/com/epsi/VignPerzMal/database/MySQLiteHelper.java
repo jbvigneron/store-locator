@@ -1,4 +1,4 @@
-package com.epsi.VignPerzMal.daos;
+package com.epsi.VignPerzMal.database;
 
 import com.epsi.VignPerzMal.models.*; 
 import android.content.ContentValues;
@@ -79,22 +79,22 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return bdd;
 	}
  
-	public long insertStore(StoreModel store){
+	public long insertStore(Store store){
 		//Création d'un ContentValues (fonctionne comme une HashMap)
 		ContentValues values = new ContentValues();
 		//on lui ajoute une valeur associé à une clé (qui est le nom de la colonne dans laquelle on veut mettre la valeur)
 		values.put(COL_CODEMAG, store.getCodeMag());
-		values.put(COL_ADRESSE, store.getAdresse());
+		values.put(COL_ADRESSE, store.getAddress());
 		//on insère l'objet dans la BDD via le ContentValues
 		return bdd.insert(TABLE_STORES, null, values);
 	}
  
-	public int updateStore(int codeMag, StoreModel store){
+	public int updateStore(int codeMag, Store store){
 		//La mise à jour d'un livre dans la BDD fonctionne plus ou moins comme une insertion
 		//il faut simple préciser quelle livre on doit mettre à jour grâce à l'ID
 		ContentValues values = new ContentValues();
 		values.put(COL_CODEMAG, store.getCodeMag());
-		values.put(COL_ADRESSE, store.getAdresse());
+		values.put(COL_ADRESSE, store.getAddress());
 		return bdd.update(TABLE_STORES, values, COL_ID + " = " + codeMag, null);
 	}
  
@@ -103,14 +103,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return bdd.delete(TABLE_STORES, COL_ID + " = " +id, null);
 	}
  
-	public StoreModel getStoreWithTitre(String titre){
+	public Store getStoreWithTitre(String titre){
 		//Récupère dans un Cursor les valeur correspondant à un livre contenu dans la BDD (ici on sélectionne le livre grâce à son titre)
 		Cursor c = bdd.query(TABLE_STORES, new String[] {COL_ID, COL_CODEMAG, COL_ADRESSE}, COL_ID + " LIKE \"" + titre +"\"", null, null, null, null);
 		return cursorToStore(c);
 	}
  
 	//Cette méthode permet de convertir un cursor en un livre
-	private StoreModel cursorToStore(Cursor c){
+	private Store cursorToStore(Cursor c){
 		//si aucun élément n'a été retourné dans la requête, on renvoie null
 		if (c.getCount() == 0)
 			return null;
@@ -118,11 +118,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		//Sinon on se place sur le premier élément
 		c.moveToFirst();
 		//On créé un livre
-		StoreModel store = new StoreModel();
+		Store store = new Store();
 		//on lui affecte toutes les infos grâce aux infos contenues dans le Cursor
 		//store.setId(c.getString(1));
-		store.setAdresse(c.getString(2));
-		store.setLibelle(c.getString(3));
+		store.setAddress(c.getString(2));
+		store.setName(c.getString(3));
 		//On ferme le cursor
 		c.close();
  
