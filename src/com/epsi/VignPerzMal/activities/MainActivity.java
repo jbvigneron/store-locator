@@ -1,12 +1,13 @@
 package com.epsi.VignPerzMal.activities;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.AbstractList;
 
 import com.epsi.VignPerzMal.adapters.StoreAdapterProvider;
-import com.epsi.VignPerzMal.controllers.StoreProviderController;
+import com.epsi.VignPerzMal.controllers.StoresProviderController;
 import com.epsi.VignPerzMal.models.Store;
-import com.epsi.VignPerzMal.parser.JsonTags;
+import com.epsi.VignPerzMal.parser.StoreTags;
 import com.epsi.VignPerzMal.storelocator.R;
 import com.epsi.VignPerzMal.storelocator.SingleContactActivity;
 
@@ -38,7 +39,7 @@ public class MainActivity extends ListActivity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				
+
 				// Get values from selected ListItem
 				String libelle = ((TextView) view.findViewById(R.id.libelle)).getText().toString();
 				String adresse = ((TextView) view.findViewById(R.id.adresse)).getText().toString();
@@ -46,16 +47,16 @@ public class MainActivity extends ListActivity {
 
 				// Starting single contact activity
 				Intent in = new Intent(getApplicationContext(), SingleContactActivity.class);
-				in.putExtra(JsonTags.TAG_NAME, libelle);
-				in.putExtra(JsonTags.TAG_ADDRESS, adresse);
-				in.putExtra(JsonTags.TAG_PHONE, phone);
-				
+				in.putExtra(StoreTags.LABEL, libelle);
+				in.putExtra(StoreTags.ADDRESS, adresse);
+				in.putExtra(StoreTags.PHONE, phone);
+
 				startActivity(in);
 			}
 		});
 
 		// Calling a-sync task to get stores
-			new GetStores().execute();
+		new GetStores().execute();
 	}
 
 	/**
@@ -77,17 +78,16 @@ public class MainActivity extends ListActivity {
 		@Override
 		protected Void doInBackground(Void... arg0) {
 
-			StoreProviderController controller;
-
+			StoresProviderController controller = new StoresProviderController();
+			URL url = null;
+			
 			try {
-				controller = new StoreProviderController();
-
-				URL url = new URL(getString(R.string.url_json));
-				stores = controller.retrieve(url);
-
-			} catch (Exception e) {
+				url = new URL(getString(R.string.url_json));
+			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}
+			
+			stores = controller.retrieve(getApplicationContext(), url);
 
 			return null;
 		}
