@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public abstract class DAL<T> {
 	
-	private static SQLiteOpenHelper helper;
+	protected static SQLiteOpenHelper helper;
 	protected static SQLiteDatabase db;
 	
 	protected String[] columns;
@@ -22,24 +22,12 @@ public abstract class DAL<T> {
 	public abstract AbstractList<T> get();
 	public abstract int count();
 	public abstract long insert(T entity);
+	public abstract AbstractList<Long> insert(AbstractList<T> entity);
 	public abstract int update(T entity);
 	public abstract int delete(T entity);
 	public abstract void clear();
 	
 	protected DAL(Context context) {
 		helper = new StoreDatabaseHandler(context);
-	}
-	
-	public void open() {
-		db = helper.getWritableDatabase();
-	}
-	
-	public void close() {
-		db.close();
-	};
-
-	@Override
-	public void finalize() {
-		close();
 	}
 }

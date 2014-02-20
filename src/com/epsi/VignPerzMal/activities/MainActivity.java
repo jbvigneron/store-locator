@@ -56,13 +56,13 @@ public class MainActivity extends ListActivity {
 		});
 
 		// Calling a-sync task to get stores
-		new GetStores().execute();
+		new GetStoresAsyncTask().execute();
 	}
 
 	/**
 	 * A-sync Task to get stores from JSON feed or from database
 	 */
-	private class GetStores extends AsyncTask<Void, Void, Void> {
+	private class GetStoresAsyncTask extends AsyncTask<Void, Void, Void> {
 
 		@Override
 		protected void onPreExecute() {
@@ -70,7 +70,7 @@ public class MainActivity extends ListActivity {
 
 			// Showing progress dialog
 			pDialog = new ProgressDialog(MainActivity.this);
-			pDialog.setMessage("Please wait...");
+			pDialog.setMessage("Chargement des magasins en cours...");
 			pDialog.setCancelable(false);
 			pDialog.show();
 		}

@@ -14,7 +14,7 @@ public class StoreDAL extends DAL<Store> {
 
 	public StoreDAL(Context context) {
 		super(context);
-		
+
 		columns = new String[] {StoreTags.ID, StoreTags.CODEMAG, StoreTags.ADDRESS, StoreTags.ZIPCODE, StoreTags.CITY, StoreTags.PHONE, StoreTags.SCHEDULE, StoreTags.FAX, StoreTags.LATITUDE, StoreTags.LONGITUDE };
 	}
 
@@ -48,67 +48,130 @@ public class StoreDAL extends DAL<Store> {
 		String fax = cursor.getString(8);
 		double latitude = cursor.getDouble(9);
 		double longitude = cursor.getDouble(10);
-		
+
 		Store store = new Store(id, codeMag, name, address, zipCode, city, phone, schedule, fax, latitude, longitude);
 		return store;
 	}
-	
+
 	@Override
 	public Store get(int id) {
-		String whereClause = StoreTags.ID +"=" + id;
-		
+		db = helper.getReadableDatabase();
+
 		Store store = null;
-		Cursor cursor = db.query(StoreDatabaseHandler.TABLE_NAME, columns, whereClause, null, null, null, null);
 		
+		String whereClause = StoreTags.ID +"=" + id;
+		Cursor cursor = db.query(StoreDatabaseHandler.TABLE_NAME, columns, whereClause, null, null, null, null);
+
 		if(cursor.moveToFirst())
 			store = extractEntity(cursor);
-		
+
+		cursor.close();
+		db.close();
+
 		return store;
 	}
 
 	@Override
 	public AbstractList<Store> get() {
-		AbstractList<Store> stores = new ArrayList<Store>();
+		db = helper.getReadableDatabase();
+
+		AbstractList<Store> stores = null;
+		
 		Cursor cursor = db.query(StoreDatabaseHandler.TABLE_NAME, columns, null, null, null, null, null);
 
 		if(cursor.moveToFirst()) {
+			stores = new ArrayList<Store>();
+
 			do {
 				Store store = extractEntity(cursor);
 				stores.add(store);
 			} while(cursor.moveToNext());
 		}
 
+		cursor.close();
+		db.close();
+
 		return stores;
 	}
-	
+
 	@Override
 	public int count() {
+		db = helper.getReadableDatabase();
+
 		Cursor cursor = db.query(StoreDatabaseHandler.TABLE_NAME, new String[] { StoreTags.ID }, null, null, null, null, null);
-		return cursor.getCount();
+		int count = cursor.getCount();
+
+		cursor.close();
+		db.close();
+
+		return count;
 	}
 
 	@Override
 	public long insert(Store entity) {
 		ContentValues values = convertInContentValues(entity);
-		return db.insert(StoreDatabaseHandler.TABLE_NAME, null, values);
+		
+		db = helper.getWritableDatabase();
+		long insertedId = db.insert(StoreDatabaseHandler.TABLE_NAME, null, values);
+		
+		db.close();
+		
+		return insertedId;
+	}
+	
+	@Override
+	public AbstractList<Long> insert(AbstractList<Store> entities) {
+		
+		AbstractList<ContentValues> valuesList = new ArrayList<ContentValues>();
+		
+		for(Store entity : entities) {
+			ContentValues values = convertInContentValues(entity);
+			valuesList.add(values);
+		}
+		
+		db = helper.getWritableDatabase();
+		
+		AbstractList<Long> insertedIds = new ArrayList<Long>();
+		
+		for(ContentValues values : valuesList) {
+			long insertedId = db.insert(StoreDatabaseHandler.TABLE_NAME, null, values);
+			insertedIds.add(insertedId);
+		}
+		
+		db.close();
+		
+		return insertedIds;
 	}
 
 	@Override
 	public int update(Store entity) {
-		String whereClause = StoreTags.ID +"=" + entity.getId();
+		ContentValues values = convertInContentValues(entity);
 		
-		ContentValues values = convertInContentValues(entity);	
-		return db.update(StoreDatabaseHandler.TABLE_NAME, values, whereClause, null);
+		db = helper.getWritableDatabase();
+		String whereClause = StoreTags.ID +"=" + entity.getId();
+		int nbRowsAffected = db.update(StoreDatabaseHandler.TABLE_NAME, values, whereClause, null);
+		
+		db.close();
+		
+		return nbRowsAffected;
 	}
 
 	@Override
 	public int delete(Store entity) {
 		String whereClause = StoreTags.ID +"=" + entity.getId();
-		return db.delete(StoreDatabaseHandler.TABLE_NAME, whereClause, null);
+		
+		db = helper.getWritableDatabase();
+		int nbRowsAffected = db.delete(StoreDatabaseHandler.TABLE_NAME, whereClause, null);
+		
+		db.close();
+		
+		return nbRowsAffected;
 	}
 
 	@Override
 	public void clear() {
-		db.execSQL("DELETE * FROM " + StoreDatabaseHandler.TABLE_NAME);
+		db = helper.getWritableDatabase();
+		db.execSQL("DELETE FROM " + StoreDatabaseHandler.TABLE_NAME);
+		db.close();
 	}
 }

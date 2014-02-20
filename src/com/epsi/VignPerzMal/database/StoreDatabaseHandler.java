@@ -9,21 +9,22 @@ import android.database.sqlite.SQLiteOpenHelper;
 class StoreDatabaseHandler extends SQLiteOpenHelper {
 	
 	private static int DB_VERSION = 1;
-	private static String DB_NAME = "StoreLocator.db";
+	private static String DB_NAME = "StoreLocator";
+	
 	public static String TABLE_NAME = "table_stores";
  
-	private String scriptCreateDb = "CREATE TABLE " 
-	+ TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT, "
-	+ StoreTags.CODEMAG + " TEXT NOT NULL, "
-	+ StoreTags.LABEL + " TEXT NOT NULL, " 
-	+ StoreTags.ADDRESS + " TEXT NOT NULL, "
-	+ StoreTags.ZIPCODE + " TEXT NOT NULL, "
-	+ StoreTags.CITY + " TEXT NOT NULL, "
+	private String scriptCreateDb = "CREATE TABLE " + TABLE_NAME +
+	" (id INTEGER PRIMARY KEY AUTOINCREMENT, "
+	+ StoreTags.CODEMAG + " TEXT, "
+	+ StoreTags.LABEL + " TEXT, " 
+	+ StoreTags.ADDRESS + " TEXT, "
+	+ StoreTags.ZIPCODE + " TEXT, "
+	+ StoreTags.CITY + " TEXT, "
 	+ StoreTags.PHONE + " TEXT, "
 	+ StoreTags.SCHEDULE + " TEXT, "
 	+ StoreTags.FAX + " TEXT, "
-	+ StoreTags.LATITUDE + " REAL NOT NULL, "
-	+ StoreTags.LONGITUDE + " REAL NOT NULL);";
+	+ StoreTags.LATITUDE + " REAL, "
+	+ StoreTags.LONGITUDE + " REAL);";
  
 	public StoreDatabaseHandler(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);

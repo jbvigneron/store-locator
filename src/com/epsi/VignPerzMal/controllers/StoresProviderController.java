@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.AbstractList;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import com.epsi.VignPerzMal.database.DAL;
 import com.epsi.VignPerzMal.database.StoreDAL;
@@ -15,7 +16,6 @@ public class StoresProviderController {
 
 	public AbstractList<Store> retrieve(Context context, URL url) {
 		AbstractList<Store> stores;
-		DAL<Store> dal;
 
 		/* Check if network is available.
 		 * If yes, retrieve stores from remote JSON feed
@@ -26,20 +26,30 @@ public class StoresProviderController {
 			stores = facade.parse(url);
 
 			if(stores != null) {
-				dal = new StoreDAL(context);
-				dal.open();
-				dal.clear();
-				
-				for(Store store : stores) {
-					dal.insert(store);
-				}
+				new SaveStoresAsyncTask().execute(context, stores);
 			}
 		}
 		else {	
-			dal = new StoreDAL(context);
-			return dal.get();
+			DAL<Store> dal = new StoreDAL(context);
+			stores = dal.get();
 		}
 
 		return stores;
+	}
+
+	/**
+	 * A-sync Task to get stores from JSON feed or from database
+	 */
+	private class SaveStoresAsyncTask extends AsyncTask<Object, Void, AbstractList<Long>> {
+
+		@Override
+		protected AbstractList<Long> doInBackground(Object... arg0) {
+			DAL<Store> dal = new StoreDAL((Context)arg0[0]);
+			dal.clear();
+
+			@SuppressWarnings("unchecked")
+			AbstractList<Store> stores = (AbstractList<Store>)arg0[1];
+			return dal.insert(stores);
+		}
 	}
 }
