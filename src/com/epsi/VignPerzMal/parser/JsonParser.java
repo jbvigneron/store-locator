@@ -14,7 +14,6 @@ import com.epsi.VignPerzMal.models.Store;
 class JsonParser {
 
 	public AbstractList<Store> parse(String stringToParse) {
-
 		Log.d("Response: ", "> " + stringToParse);
 
 		AbstractList<Store> stores = null;
@@ -32,16 +31,16 @@ class JsonParser {
 			for (int i = 0; i < storesJSON.length(); i++) {
 				JSONObject storeJSON = storesJSON.getJSONObject(i);
 
-				String codeMag = storeJSON.getString(JsonTags.TAG_CODEMAG);
-				String name = storeJSON.getString(JsonTags.TAG_NAME);
-				String address = storeJSON.getString(JsonTags.TAG_ADDRESS);
-				String zipCode = storeJSON.getString(JsonTags.TAG_ZIPCODE);
-				String city = storeJSON.getString(JsonTags.TAG_CITY);
-				String schedule = storeJSON.getString(JsonTags.TAG_SCHEDULE);
-				String phone = storeJSON.getString(JsonTags.TAG_PHONE);
-				String fax = storeJSON.getString(JsonTags.TAG_FAX);
-				String longitude = storeJSON.getString(JsonTags.TAG_LONGITUDE);
-				String latitude = storeJSON.getString(JsonTags.TAG_LATITUDE);
+				String codeMag = storeJSON.isNull(StoreTags.CODEMAG) ? null : storeJSON.getString(StoreTags.CODEMAG);
+				String name = storeJSON.isNull(StoreTags.LABEL) ? null : storeJSON.getString(StoreTags.LABEL);
+				String address = storeJSON.isNull(StoreTags.ADDRESS) ? null : storeJSON.getString(StoreTags.ADDRESS);
+				String zipCode = storeJSON.isNull(StoreTags.ZIPCODE) ? null : storeJSON.getString(StoreTags.ZIPCODE);
+				String city = storeJSON.isNull(StoreTags.CITY) ? null : storeJSON.getString(StoreTags.CITY);
+				String schedule = storeJSON.isNull(StoreTags.SCHEDULE) ? null : storeJSON.getString(StoreTags.SCHEDULE);
+				String phone = storeJSON.isNull(StoreTags.PHONE) ? null : storeJSON.getString(StoreTags.PHONE);
+				String fax = storeJSON.isNull(StoreTags.FAX) ? null : storeJSON.getString(StoreTags.FAX);
+				double longitude = storeJSON.isNull(StoreTags.LONGITUDE) ? null : storeJSON.getDouble(StoreTags.LONGITUDE);
+				double latitude = storeJSON.isNull(StoreTags.LATITUDE) ? null : storeJSON.getDouble(StoreTags.LATITUDE);
 
 				Store store = new Store(codeMag, name, address, zipCode, city, phone, schedule, fax, latitude, longitude);
 				stores.add(store);
