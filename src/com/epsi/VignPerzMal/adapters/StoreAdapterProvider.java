@@ -10,7 +10,7 @@ import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
 
 import com.epsi.VignPerzMal.models.Store;
-import com.epsi.VignPerzMal.parser.JsonTags;
+import com.epsi.VignPerzMal.parser.StoreTags;
 import com.epsi.VignPerzMal.storelocator.R;
 
 public class StoreAdapterProvider {
@@ -25,22 +25,24 @@ public class StoreAdapterProvider {
 
 		AbstractList<Map<String, String>> results = new ArrayList<Map<String,String>>();
 
-		for(Store store : stores) {
-			HashMap<String, String> result = new HashMap<String, String>();
+		if(stores != null) {
+			for(Store store : stores) {
+				HashMap<String, String> result = new HashMap<String, String>();
 
-			// adding each child node to HashMap key => value
-			result.put(JsonTags.TAG_CODEMAG, store.getCodeMag());
-			result.put(JsonTags.TAG_NAME, store.getName());
-			result.put(JsonTags.TAG_ADDRESS, store.getAddress());
-			result.put(JsonTags.TAG_PHONE, store.getPhone());
+				// adding each child node to HashMap key => value
+				result.put(StoreTags.CODEMAG, store.getCodeMag());
+				result.put(StoreTags.LABEL, store.getName());
+				result.put(StoreTags.ADDRESS, store.getAddress());
+				result.put(StoreTags.PHONE, store.getPhone());
 
-			// adding contact to contact list
-			results.add(result);
+				// adding contact to contact list
+				results.add(result);
+			}
 		}
-		
-		String[] from = new String[] { JsonTags.TAG_NAME, JsonTags.TAG_ADDRESS, JsonTags.TAG_PHONE };
+
+		String[] from = new String[] { StoreTags.LABEL, StoreTags.ADDRESS, StoreTags.PHONE };
 		int[] to = new int[] { R.id.libelle, R.id.adresse, R.id.phone };
-		
+
 		ListAdapter adapter = new SimpleAdapter(context, results, R.layout.list_item, from, to);
 
 		return adapter;
