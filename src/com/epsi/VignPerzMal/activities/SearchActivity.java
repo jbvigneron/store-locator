@@ -21,7 +21,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class MainActivity extends ListActivity {
+public class SearchActivity extends ListActivity {
 
 	private ProgressDialog pDialog;
 	private AbstractList<Store> stores = null;
@@ -30,7 +30,7 @@ public class MainActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_search);
 
 		ListView lv = getListView();
 		lv.setOnItemClickListener(new OnItemClickListener() {
@@ -67,7 +67,7 @@ public class MainActivity extends ListActivity {
 			super.onPreExecute();
 
 			// Showing progress dialog
-			pDialog = new ProgressDialog(MainActivity.this);
+			pDialog = new ProgressDialog(SearchActivity.this);
 			pDialog.setMessage("Chargement des magasins en cours...");
 			pDialog.setCancelable(false);
 			pDialog.show();
@@ -91,7 +91,7 @@ public class MainActivity extends ListActivity {
 
 			// Show stores in ListView
 			StoreAdapterProvider adapterProvider = new StoreAdapterProvider();
-			ListAdapter adapter = adapterProvider.adapt(MainActivity.this, stores);
+			ListAdapter adapter = adapterProvider.adapt(SearchActivity.this, stores);
 			setListAdapter(adapter);
 		}
 	}
