@@ -1,7 +1,5 @@
 package com.epsi.VignPerzMal.activities;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.AbstractList;
 
 import com.epsi.VignPerzMal.adapters.StoreAdapterProvider;
@@ -79,15 +77,7 @@ public class MainActivity extends ListActivity {
 		protected Void doInBackground(Void... arg0) {
 
 			StoresProviderController controller = new StoresProviderController();
-			URL url = null;
-			
-			try {
-				url = new URL(getString(R.string.url_json));
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			}
-			
-			stores = controller.retrieve(getApplicationContext(), url);
+			stores = controller.retrieve(getApplicationContext());
 
 			return null;
 		}

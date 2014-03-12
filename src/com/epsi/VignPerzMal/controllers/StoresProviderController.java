@@ -1,6 +1,5 @@
 package com.epsi.VignPerzMal.controllers;
 
-import java.net.URL;
 import java.util.AbstractList;
 
 import android.content.Context;
@@ -14,7 +13,7 @@ import com.epsi.VignPerzMal.parser.FacadeParser;
 
 public class StoresProviderController {
 
-	public AbstractList<Store> retrieve(Context context, URL url) {
+	public AbstractList<Store> retrieve(Context context) {
 		AbstractList<Store> stores;
 
 		/* Check if network is available.
@@ -23,7 +22,7 @@ public class StoresProviderController {
 		 */
 		if(NetworkInfoHelper.isNetworkAvailable(context)) {
 			FacadeParser facade = new FacadeParser();
-			stores = facade.parse(url);
+			stores = facade.parse();
 
 			if(stores != null) {
 				new SaveStoresAsyncTask().execute(context, stores);
