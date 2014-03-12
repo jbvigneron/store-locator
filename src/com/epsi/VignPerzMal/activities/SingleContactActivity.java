@@ -1,4 +1,4 @@
-package com.epsi.VignPerzMal.storelocator;
+package com.epsi.VignPerzMal.activities;
 
 
 
@@ -6,7 +6,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
 import com.epsi.VignPerzMal.storelocator.R;
+import com.epsi.VignPerzMal.storelocator.R.id;
+import com.epsi.VignPerzMal.storelocator.R.layout;
 
 public class SingleContactActivity  extends Activity {
 	

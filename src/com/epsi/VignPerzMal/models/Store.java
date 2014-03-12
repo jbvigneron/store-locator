@@ -1,7 +1,7 @@
 package com.epsi.VignPerzMal.models;
 
 public class Store {
-	
+	private int id;
 	private String codeMag;
 	private String name;
 	private String address;
@@ -10,16 +10,19 @@ public class Store {
 	private String phone;
 	private String schedule;
 	private String fax;
-	private String latitude;
-	private String longitude;
+	private double latitude;
+	private double longitude;
 
 	public Store() {
+		super();
 	}
 	
-	public Store(String codeMag, String name, String address, String zipCode,
+	public Store(int id, String codeMag, String name, String address, String zipCode,
 			String city, String phone, String schedule, String fax,
-			String latitude, String longitude) {
-		super();
+			double latitude, double longitude) {
+		this();
+		
+		this.id = id;
 		this.codeMag = codeMag;
 		this.name = name;
 		this.address = address;
@@ -30,6 +33,20 @@ public class Store {
 		this.fax = fax;
 		this.latitude = latitude;
 		this.longitude = longitude;
+	}
+	
+	public Store(String codeMag, String name, String address, String zipCode,
+			String city, String phone, String schedule, String fax,
+			double latitude, double longitude) {
+		this(0, codeMag, name, address, zipCode, city, phone, schedule, fax, latitude, longitude);
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getCodeMag() { return codeMag; }
@@ -56,11 +73,11 @@ public class Store {
 	public String getFax() { return fax; }
 	public void setFax(String fax) { this.fax = fax; }
 
-	public String getLatitude() { return latitude; }
-	public void setLatitude(String latitude) { this.latitude = latitude; }
+	public double getLatitude() { return latitude; }
+	public void setLatitude(double latitude) { this.latitude = latitude; }
 
-	public String getLongitude() { return longitude; }
-	public void setLongitude(String longitude) { this.longitude = longitude; }
+	public double getLongitude() { return longitude; }
+	public void setLongitude(double longitude) { this.longitude = longitude; }
 
 	@Override
 	public String toString() {
