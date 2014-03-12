@@ -7,7 +7,6 @@ import com.epsi.VignPerzMal.controllers.StoresProviderController;
 import com.epsi.VignPerzMal.models.Store;
 import com.epsi.VignPerzMal.parser.StoreTags;
 import com.epsi.VignPerzMal.storelocator.R;
-import com.epsi.VignPerzMal.storelocator.SingleContactActivity;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;

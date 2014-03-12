@@ -7,4 +7,6 @@
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="title_activity_single_contact">SingleContactActivity</string>
     <string name="title_activity_data_overview">DataOverviewActivity</string>
+    <string name="title_activity_search">Search</string>
+    <string name="title_activity_display_store">DisplayStore</string>
 </resources>
