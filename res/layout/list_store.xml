@@ -18,7 +18,7 @@
         android:padding="10px" >
 
         <EditText
-            android:id="@+id/editTextCodePostal"
+            android:id="@+id/tvZipCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="6"
@@ -28,7 +28,7 @@
         </EditText>
 
         <Button
-            android:id="@+id/buttonSearch"
+            android:id="@+id/btnSearch"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
