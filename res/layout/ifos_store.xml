@@ -1,0 +1,101 @@
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/fond_appli"
+    android:orientation="vertical"
+    tools:context=".accueil" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp" 
+        >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:padding="10dp">
+          
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nom boutique" />
+
+            <TextView
+                android:id="@+id/tVNomStore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nom store"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Téléphone" />
+
+            <TextView
+                android:id="@+id/tVNumStore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="03.03.03.03.03"
+                android:textAppearance="?android:attr/textAppearanceLarge" 
+                android:layout_marginLeft="5dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nom boutique" />
+
+            <TextView
+                android:id="@+id/tVAdresse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="rue de la poupée qui tousse, 62000 Arras"
+                android:textAppearance="?android:attr/textAppearanceLarge" 
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nom boutique" />
+
+            <TextView
+                android:id="@+id/tVHoraire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10h-12 14h-19h"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
