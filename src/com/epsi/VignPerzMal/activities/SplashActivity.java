@@ -1,72 +1,74 @@
 package com.epsi.VignPerzMal.activities;
 
-import com.epsi.VignPerzMal.storelocator.R;
-import com.epsi.VignPerzMal.storelocator.R.layout;
+import java.util.AbstractList;
 
+import com.epsi.VignPerzMal.database.DAL;
+import com.epsi.VignPerzMal.database.StoreDAL;
+import com.epsi.VignPerzMal.helpers.NetworkInfoHelper;
+import com.epsi.VignPerzMal.model.Store;
+import com.epsi.VignPerzMal.storelocator.R;
+import com.epsi.VignPerzMal.storesparser.StoreParserFacade;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
-import android.view.MotionEvent;
-import android.widget.ProgressBar;
 
 public class SplashActivity extends Activity {
 
-	/** Durée d'affichage du SplashScreen */
-	protected int _splashTime = 5000; 
-	
-	//modifier le manifest pour qu'il n'y est d'un unique lanceur  
-
-	private Thread splashTread;
-
-	/** Chargement de l'Activity */
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
 
-		
-		
-		final SplashActivity sPlashScreen = this; 
+		AsyncTask<Void, Void, AbstractList<Store>> task = new LoadStoresAsyncTask();
+		task.execute();
+	}	
+	
+	/***
+	 * Asynchronous task which retrieve stores from JSON if network is available
+	 * or from database if not
+	 */
+	class LoadStoresAsyncTask extends AsyncTask<Void, Void, AbstractList<Store>> {
 
-		/** Thread pour l'affichage du SplashScreen */
-		splashTread = new Thread() 
-		{
-			@Override
-			public void run() 
-			{
-				try 
-				{
-					synchronized(this)
-					{
-						wait(_splashTime);
-					}
-				} catch(InterruptedException e) {} 
-				finally 
-				{
-					finish();
-					Intent i = new Intent();
-					i.setClass(sPlashScreen, MainActivity.class);
-					startActivity(i);
+		@Override
+		/***
+		 * Retrieve stores from JSON feed if network is available or from database if not
+		 */
+		protected AbstractList<Store> doInBackground(Void... params) {
+			
+			AbstractList<Store> stores;
+			
+			// Check if network is available.
+			// If yes, retrieve stores from remote JSON feed
+			if(NetworkInfoHelper.isNetworkAvailable(getApplicationContext())) {
+				StoreParserFacade facade = new StoreParserFacade();
+				stores = facade.get();
+
+				if(stores != null) {
+					DAL<Store> dal = new StoreDAL(getApplicationContext());
+					dal.clear();
+
+					dal.insert(stores);
 				}
 			}
-		};
-
-		splashTread.start();
-	}
-	@Override
-	public boolean onTouchEvent(MotionEvent event) 
-	{
-		/** Si l'utilisateur fait un mouvement de haut en bas on passe à l'Activity principale */
-		if (event.getAction() == MotionEvent.ACTION_DOWN) 
-		{
-			synchronized(splashTread)
-			{
-				splashTread.notifyAll();
+			// If not, retrieve stores from database
+			else {	
+				DAL<Store> dal = new StoreDAL(getApplicationContext());
+				stores = dal.get();
 			}
+			
+			return stores;
 		}
-		return true;
-	}	
-
+		
+		/***
+		 * Action is finished. Display the main activity.
+		 */
+		protected void onPostExecute(AbstractList<Store> results) {
+			Intent i = new Intent();
+			i.setClass(getApplicationContext(), MainActivity.class);
+			startActivity(i);
+		}
+	}
 }

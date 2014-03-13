@@ -3,7 +3,6 @@ package com.epsi.VignPerzMal.activities;
 import java.util.AbstractList;
 
 import com.epsi.VignPerzMal.adapters.StoreAdapterProvider;
-import com.epsi.VignPerzMal.controllers.StoresProviderController;
 import com.epsi.VignPerzMal.model.Store;
 import com.epsi.VignPerzMal.storelocator.R;
 import com.epsi.VignPerzMal.storesparser.StoreConstants;
@@ -75,8 +74,8 @@ public class SearchActivity extends ListActivity {
 		@Override
 		protected Void doInBackground(Void... arg0) {
 
-			StoresProviderController controller = new StoresProviderController();
-			stores = controller.retrieve(getApplicationContext());
+			//StoresProviderController controller = new StoresProviderController();
+			//stores = controller.retrieve(getApplicationContext());
 
 			return null;
 		}
