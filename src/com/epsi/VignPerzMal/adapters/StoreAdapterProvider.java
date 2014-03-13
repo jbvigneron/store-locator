@@ -9,9 +9,9 @@ import android.content.Context;
 import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
 
-import com.epsi.VignPerzMal.models.Store;
-import com.epsi.VignPerzMal.parser.StoreTags;
+import com.epsi.VignPerzMal.model.Store;
 import com.epsi.VignPerzMal.storelocator.R;
+import com.epsi.VignPerzMal.storesparser.StoreConstants;
 
 public class StoreAdapterProvider {
 
@@ -30,17 +30,17 @@ public class StoreAdapterProvider {
 				HashMap<String, String> result = new HashMap<String, String>();
 
 				// adding each child node to HashMap key => value
-				result.put(StoreTags.CODEMAG, store.getCodeMag());
-				result.put(StoreTags.LABEL, store.getName());
-				result.put(StoreTags.ADDRESS, store.getAddress());
-				result.put(StoreTags.PHONE, store.getPhone());
+				result.put(StoreConstants.CODEMAG, store.getCodeMag());
+				result.put(StoreConstants.LABEL, store.getName());
+				result.put(StoreConstants.ADDRESS, store.getAddress());
+				result.put(StoreConstants.PHONE, store.getPhone());
 
 				// adding contact to contact list
 				results.add(result);
 			}
 		}
 
-		String[] from = new String[] { StoreTags.LABEL, StoreTags.ADDRESS, StoreTags.PHONE };
+		String[] from = new String[] { StoreConstants.LABEL, StoreConstants.ADDRESS, StoreConstants.PHONE };
 		int[] to = new int[] { R.id.libelle, R.id.adresse, R.id.phone };
 
 		ListAdapter adapter = new SimpleAdapter(context, results, R.layout.list_item, from, to);

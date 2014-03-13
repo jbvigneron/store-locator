@@ -7,30 +7,30 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
-import com.epsi.VignPerzMal.models.Store;
-import com.epsi.VignPerzMal.parser.StoreTags;
+import com.epsi.VignPerzMal.model.Store;
+import com.epsi.VignPerzMal.storesparser.StoreConstants;
 
 public class StoreDAL extends DAL<Store> {
 
 	public StoreDAL(Context context) {
 		super(context);
 
-		columns = new String[] {StoreTags.ID, StoreTags.CODEMAG, StoreTags.ADDRESS, StoreTags.ZIPCODE, StoreTags.CITY, StoreTags.PHONE, StoreTags.SCHEDULE, StoreTags.FAX, StoreTags.LATITUDE, StoreTags.LONGITUDE };
+		columns = new String[] {StoreConstants.ID, StoreConstants.CODEMAG, StoreConstants.ADDRESS, StoreConstants.ZIPCODE, StoreConstants.CITY, StoreConstants.PHONE, StoreConstants.SCHEDULE, StoreConstants.FAX, StoreConstants.LATITUDE, StoreConstants.LONGITUDE };
 	}
 
 	@Override
 	protected ContentValues convertInContentValues(Store entity) {
 		ContentValues values = new ContentValues();
-		values.put(StoreTags.ADDRESS, entity.getAddress());
-		values.put(StoreTags.CITY, entity.getCity());
-		values.put(StoreTags.CODEMAG, entity.getCodeMag());
-		values.put(StoreTags.FAX, entity.getFax());
-		values.put(StoreTags.LATITUDE, entity.getLatitude());
-		values.put(StoreTags.LONGITUDE, entity.getLongitude());
-		values.put(StoreTags.LABEL, entity.getName());
-		values.put(StoreTags.PHONE, entity.getPhone());
-		values.put(StoreTags.SCHEDULE, entity.getSchedule());
-		values.put(StoreTags.ZIPCODE, entity.getZipCode());
+		values.put(StoreConstants.ADDRESS, entity.getAddress());
+		values.put(StoreConstants.CITY, entity.getCity());
+		values.put(StoreConstants.CODEMAG, entity.getCodeMag());
+		values.put(StoreConstants.FAX, entity.getFax());
+		values.put(StoreConstants.LATITUDE, entity.getLatitude());
+		values.put(StoreConstants.LONGITUDE, entity.getLongitude());
+		values.put(StoreConstants.LABEL, entity.getName());
+		values.put(StoreConstants.PHONE, entity.getPhone());
+		values.put(StoreConstants.SCHEDULE, entity.getSchedule());
+		values.put(StoreConstants.ZIPCODE, entity.getZipCode());
 
 		return values;
 	}
@@ -59,7 +59,7 @@ public class StoreDAL extends DAL<Store> {
 
 		Store store = null;
 		
-		String whereClause = StoreTags.ID +"=" + id;
+		String whereClause = StoreConstants.ID +"=" + id;
 		Cursor cursor = db.query(StoreDatabaseHandler.TABLE_NAME, columns, whereClause, null, null, null, null);
 
 		if(cursor.moveToFirst())
@@ -98,7 +98,7 @@ public class StoreDAL extends DAL<Store> {
 	public int count() {
 		db = helper.getReadableDatabase();
 
-		Cursor cursor = db.query(StoreDatabaseHandler.TABLE_NAME, new String[] { StoreTags.ID }, null, null, null, null, null);
+		Cursor cursor = db.query(StoreDatabaseHandler.TABLE_NAME, new String[] { StoreConstants.ID }, null, null, null, null, null);
 		int count = cursor.getCount();
 
 		cursor.close();
@@ -148,7 +148,7 @@ public class StoreDAL extends DAL<Store> {
 		ContentValues values = convertInContentValues(entity);
 		
 		db = helper.getWritableDatabase();
-		String whereClause = StoreTags.ID +"=" + entity.getId();
+		String whereClause = StoreConstants.ID +"=" + entity.getId();
 		int nbRowsAffected = db.update(StoreDatabaseHandler.TABLE_NAME, values, whereClause, null);
 		
 		db.close();
@@ -158,7 +158,7 @@ public class StoreDAL extends DAL<Store> {
 
 	@Override
 	public int delete(Store entity) {
-		String whereClause = StoreTags.ID +"=" + entity.getId();
+		String whereClause = StoreConstants.ID +"=" + entity.getId();
 		
 		db = helper.getWritableDatabase();
 		int nbRowsAffected = db.delete(StoreDatabaseHandler.TABLE_NAME, whereClause, null);

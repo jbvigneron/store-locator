@@ -8,8 +8,8 @@ import android.os.AsyncTask;
 import com.epsi.VignPerzMal.database.DAL;
 import com.epsi.VignPerzMal.database.StoreDAL;
 import com.epsi.VignPerzMal.helpers.NetworkInfoHelper;
-import com.epsi.VignPerzMal.models.Store;
-import com.epsi.VignPerzMal.parser.FacadeParser;
+import com.epsi.VignPerzMal.model.Store;
+import com.epsi.VignPerzMal.storesparser.StoreParserFacade;
 
 public class StoresProviderController {
 
@@ -21,8 +21,8 @@ public class StoresProviderController {
 		 * If not, retrieve stores from database
 		 */
 		if(NetworkInfoHelper.isNetworkAvailable(context)) {
-			FacadeParser facade = new FacadeParser();
-			stores = facade.parse();
+			StoreParserFacade facade = new StoreParserFacade();
+			stores = facade.get();
 
 			if(stores != null) {
 				new SaveStoresAsyncTask().execute(context, stores);

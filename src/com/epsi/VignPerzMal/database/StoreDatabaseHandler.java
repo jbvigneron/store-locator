@@ -1,6 +1,6 @@
 package com.epsi.VignPerzMal.database;
 
-import com.epsi.VignPerzMal.parser.StoreTags;
+import com.epsi.VignPerzMal.storesparser.StoreConstants;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,16 +15,16 @@ class StoreDatabaseHandler extends SQLiteOpenHelper {
  
 	private String scriptCreateDb = "CREATE TABLE " + TABLE_NAME +
 	" (id INTEGER PRIMARY KEY AUTOINCREMENT, "
-	+ StoreTags.CODEMAG + " TEXT, "
-	+ StoreTags.LABEL + " TEXT, " 
-	+ StoreTags.ADDRESS + " TEXT, "
-	+ StoreTags.ZIPCODE + " TEXT, "
-	+ StoreTags.CITY + " TEXT, "
-	+ StoreTags.PHONE + " TEXT, "
-	+ StoreTags.SCHEDULE + " TEXT, "
-	+ StoreTags.FAX + " TEXT, "
-	+ StoreTags.LATITUDE + " REAL, "
-	+ StoreTags.LONGITUDE + " REAL);";
+	+ StoreConstants.CODEMAG + " TEXT, "
+	+ StoreConstants.LABEL + " TEXT, " 
+	+ StoreConstants.ADDRESS + " TEXT, "
+	+ StoreConstants.ZIPCODE + " TEXT, "
+	+ StoreConstants.CITY + " TEXT, "
+	+ StoreConstants.PHONE + " TEXT, "
+	+ StoreConstants.SCHEDULE + " TEXT, "
+	+ StoreConstants.FAX + " TEXT, "
+	+ StoreConstants.LATITUDE + " REAL, "
+	+ StoreConstants.LONGITUDE + " REAL);";
  
 	public StoreDatabaseHandler(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);

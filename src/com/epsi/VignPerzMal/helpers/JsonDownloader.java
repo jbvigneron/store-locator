@@ -1,4 +1,4 @@
-package com.epsi.VignPerzMal.parser;
+package com.epsi.VignPerzMal.helpers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,18 +18,18 @@ import android.util.Log;
 /**
  * Download a string from a URL
  */
-class JsonDownloader {
+public class JsonDownloader {
 
 	/**
 	 * Download a string from a given URL
 	 * @param url URL to contact
 	 * @return The result string
 	 */
-	public String downloadFeed() {
+	public String downloadFeed(String url) {
 		StringBuilder builder = new StringBuilder();
 
 		HttpClient client = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet(Constants.URL);
+		HttpGet httpGet = new HttpGet(url);
 
 		try {
 			HttpResponse response = client.execute(httpGet);

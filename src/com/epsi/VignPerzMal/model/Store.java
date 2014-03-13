@@ -1,4 +1,4 @@
-package com.epsi.VignPerzMal.models;
+package com.epsi.VignPerzMal.model;
 
 public class Store {
 	

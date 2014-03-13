@@ -1,6 +1,12 @@
-package com.epsi.VignPerzMal.parser;
+package com.epsi.VignPerzMal.storesparser;
 
-public class StoreTags {
+public class StoreConstants {
+	
+	public static final String URL = "http://infospirit.free.fr/magasins.json";
+	
+	public static final String STORES = "Magasins";
+	public static final String STORE = "Magasin";
+	
 	public static final String ID = "Id";
 	public static final String CODEMAG = "CodeMAG";
 	public static final String LABEL = "Libelle";

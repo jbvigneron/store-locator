@@ -9,8 +9,8 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.epsi.VignPerzMal.parser.StoreTags;
 import com.epsi.VignPerzMal.storelocator.R;
+import com.epsi.VignPerzMal.storesparser.StoreConstants;
 
 public class DisplayStoreActivity  extends Activity implements OnClickListener {
 	
@@ -42,9 +42,9 @@ public class DisplayStoreActivity  extends Activity implements OnClickListener {
         Intent in = getIntent();
         
         // Get values from precedent intents
-        String label = in.getStringExtra(StoreTags.LABEL);
-        String address = in.getStringExtra(StoreTags.ADDRESS);
-        String phone = in.getStringExtra(StoreTags.PHONE);
+        String label = in.getStringExtra(StoreConstants.LABEL);
+        String address = in.getStringExtra(StoreConstants.ADDRESS);
+        String phone = in.getStringExtra(StoreConstants.PHONE);
 
         // Set values
         lblLabel.setText(label);

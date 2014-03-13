@@ -4,9 +4,9 @@ import java.util.AbstractList;
 
 import com.epsi.VignPerzMal.adapters.StoreAdapterProvider;
 import com.epsi.VignPerzMal.controllers.StoresProviderController;
-import com.epsi.VignPerzMal.models.Store;
-import com.epsi.VignPerzMal.parser.StoreTags;
+import com.epsi.VignPerzMal.model.Store;
 import com.epsi.VignPerzMal.storelocator.R;
+import com.epsi.VignPerzMal.storesparser.StoreConstants;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -44,9 +44,9 @@ public class SearchActivity extends ListActivity {
 
 				// Starting single contact activity
 				Intent in = new Intent(getApplicationContext(), DisplayStoreActivity.class);
-				in.putExtra(StoreTags.LABEL, libelle);
-				in.putExtra(StoreTags.ADDRESS, adresse);
-				in.putExtra(StoreTags.PHONE, phone);
+				in.putExtra(StoreConstants.LABEL, libelle);
+				in.putExtra(StoreConstants.ADDRESS, adresse);
+				in.putExtra(StoreConstants.PHONE, phone);
 
 				startActivity(in);
 			}
