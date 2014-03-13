@@ -9,4 +9,6 @@
     <string name="title_activity_data_overview">DataOverviewActivity</string>
     <string name="title_activity_search">Search</string>
     <string name="title_activity_display_store">DisplayStore</string>
+    <string name="title_activity_splash">Splash</string>
+
 </resources>

@@ -10,7 +10,7 @@
 
     <!-- Internet permission -->
     <uses-permission android:name="android.permission.INTERNET" />
-    
+
     <!-- Network state permission -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -18,27 +18,33 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
-        
+        android:theme="@style/AppTheme" >
         <activity
             android:name="com.epsi.VignPerzMal.activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="com.epsi.VignPerzMal.storelocator.SearchActivity"
-            android:label="@string/title_activity_search">
+            android:label="@string/title_activity_search" >
         </activity>
-
         <activity
             android:name="com.epsi.VignPerzMal.storelocator.DisplayStoreActivity"
             android:label="@string/title_activity_display_store" >
         </activity>
-        
+        <activity
+            android:name="com.epsi.VignPerzMal.storelocator.Splash"
+            android:label="@string/title_activity_splash" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
