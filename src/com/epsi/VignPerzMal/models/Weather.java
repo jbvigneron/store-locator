@@ -3,6 +3,7 @@ package com.epsi.VignPerzMal.models;
 import java.util.List;
 
 public class Weather {
+	
 	private List<CurrentWeather> current_weather;
 	private List<Forecast> forecast;
 	

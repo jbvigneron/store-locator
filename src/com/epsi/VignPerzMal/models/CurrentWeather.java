@@ -1,29 +1,22 @@
 package com.epsi.VignPerzMal.models;
 
-import java.util.List;
-
 public class CurrentWeather
 {
 	private String humidity;
 	private String pressure;
 	private String temp;
 	private String temp_unit;
-	private String weather_code;
-	private String weather_text;
-	private List<Wind> wind;
+	private TimeOfDay time_of_day;
 
 	public CurrentWeather(String humidity, String pressure, String temp,
-			String temp_unit, String weather_code, String weather_text,
-			List<Wind> wind) {
+			String temp_unit, TimeOfDay time_of_day) {
 		super();
-		
+
 		this.humidity = humidity;
 		this.pressure = pressure;
 		this.temp = temp;
 		this.temp_unit = temp_unit;
-		this.weather_code = weather_code;
-		this.weather_text = weather_text;
-		this.wind = wind;
+		this.time_of_day = time_of_day;
 	}
 
 	public String getHumidity() {
@@ -34,41 +27,35 @@ public class CurrentWeather
 		this.humidity = humidity;
 	}
 
-	public String getPressure(){
+	public String getPressure() {
 		return pressure;
 	}
 
 	public void setPressure(String pressure) {
 		this.pressure = pressure;
 	}
+	
 	public String getTemp() {
 		return temp;
 	}
+	
 	public void setTemp(String temp) {
 		this.temp = temp;
 	}
-	public String getTemp_unit() {
+
+	public String getTempUnit() {
 		return temp_unit;
 	}
-	public void setTemp_unit(String temp_unit) {
+
+	public void setTempUnit(String temp_unit) {
 		this.temp_unit = temp_unit;
 	}
-	public String getWeather_code() {
-		return weather_code;
+
+	public TimeOfDay getTimeOfDay() {
+		return time_of_day;
 	}
-	public void setWeather_code(String weather_code) {
-		this.weather_code = weather_code;
-	}
-	public String getWeather_text() {
-		return weather_text;
-	}
-	public void setWeather_text(String weather_text) {
-		this.weather_text = weather_text;
-	}
-	public List<Wind> getWind() {
-		return wind;
-	}
-	public void setWind(List<Wind> wind) {
-		this.wind = wind;
+
+	public void setTimeOfDay(TimeOfDay time_of_day) {
+		this.time_of_day = time_of_day;
 	}
 }

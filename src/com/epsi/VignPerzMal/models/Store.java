@@ -1,6 +1,7 @@
 package com.epsi.VignPerzMal.models;
 
 public class Store {
+	
 	private int id;
 	private String codeMag;
 	private String name;

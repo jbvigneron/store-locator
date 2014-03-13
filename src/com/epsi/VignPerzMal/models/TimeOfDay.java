@@ -3,6 +3,7 @@ package com.epsi.VignPerzMal.models;
 import java.util.List;
 
 public abstract class TimeOfDay {
+	
 	private String weather_code;
 	private String weather_text;
 	private List<Wind> winds;
