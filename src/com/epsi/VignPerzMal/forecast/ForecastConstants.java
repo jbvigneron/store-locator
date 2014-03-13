@@ -2,7 +2,7 @@ package com.epsi.VignPerzMal.forecast;
 
 public class ForecastConstants {
 	
-	public static final String URL = "www.myweather2.com/developer/forecast.ashx?uac=r/Qa4EXCrM&output=json&query=%d,%d";
+	public static final String URL = "www.myweather2.com/developer/forecast.ashx?uac=r/Qa4EXCrM&output=json&query=";
 	
 	// Wind
 	public static final String DIR = "dir";
