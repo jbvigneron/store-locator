@@ -32,7 +32,7 @@ class StoreParser {
 				JSONObject storeJSON = storesJSON.getJSONObject(i);
 
 				String codeMag = storeJSON.optString(StoreConstants.CODEMAG);
-				String name = storeJSON.optString(StoreConstants.LABEL);
+				String name = storeJSON.optString(StoreConstants.NAME);
 				String address = storeJSON.optString(StoreConstants.ADDRESS);
 				String zipCode = storeJSON.optString(StoreConstants.ZIPCODE);
 				String city = storeJSON.optString(StoreConstants.CITY);

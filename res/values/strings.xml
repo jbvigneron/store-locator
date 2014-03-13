@@ -18,4 +18,16 @@
     <string name="label_voicecall">Appeler le magasin</string>
     
     <string name="label_forecast">Météo</string>
+    
+    <string name="label_zipcode">Code Postal</string>
+    
+    <string name="label_search">Rechercher</string>
+    
+    <string name="label_aroundme">Autour de moi</string>
+    
+    <string name="label_list">Liste</string>
+    
+    <string name="label_map">Carte</string>
+    
+    <string name="message_enter_zip_code">Entrez un code postal valide.</string>
 </resources>

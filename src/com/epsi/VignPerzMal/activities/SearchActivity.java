@@ -43,7 +43,7 @@ public class SearchActivity extends ListActivity {
 
 				// Starting single contact activity
 				Intent in = new Intent(getApplicationContext(), DisplayStoreActivity.class);
-				in.putExtra(StoreConstants.LABEL, libelle);
+				in.putExtra(StoreConstants.NAME, libelle);
 				in.putExtra(StoreConstants.ADDRESS, adresse);
 				in.putExtra(StoreConstants.PHONE, phone);
 

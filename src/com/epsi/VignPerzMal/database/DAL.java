@@ -20,6 +20,7 @@ public abstract class DAL<T> {
 	
 	public abstract T get(int id);
 	public abstract AbstractList<T> get();
+	public abstract AbstractList<T> search(String zipCode);
 	public abstract int count();
 	public abstract long insert(T entity);
 	public abstract AbstractList<Long> insert(AbstractList<T> entity);

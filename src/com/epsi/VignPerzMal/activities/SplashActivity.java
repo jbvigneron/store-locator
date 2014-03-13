@@ -22,50 +22,42 @@ public class SplashActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
 
-		AsyncTask<Void, Void, AbstractList<Store>> task = new LoadStoresAsyncTask();
+		AsyncTask<Void, Void, Void> task = new LoadStoresAsyncTask();
 		task.execute();
 	}	
-	
+
 	/***
 	 * Asynchronous task which retrieve stores from JSON if network is available
 	 * or from database if not
 	 */
-	class LoadStoresAsyncTask extends AsyncTask<Void, Void, AbstractList<Store>> {
+	class LoadStoresAsyncTask extends AsyncTask<Void, Void, Void> {
 
 		@Override
 		/***
 		 * Retrieve stores from JSON feed if network is available or from database if not
 		 */
-		protected AbstractList<Store> doInBackground(Void... params) {
-			
-			AbstractList<Store> stores;
-			
-			// Check if network is available.
-			// If yes, retrieve stores from remote JSON feed
+		protected Void doInBackground(Void... params) {
+
+			DAL<Store> dal = new StoreDAL(getApplicationContext()); 
+
+			// If network is available, retrieve stores from remote JSON feed
 			if(NetworkInfoHelper.isNetworkAvailable(getApplicationContext())) {
 				StoreParserFacade facade = new StoreParserFacade();
-				stores = facade.get();
+				AbstractList<Store> storesJSON = facade.get();
 
-				if(stores != null) {
-					DAL<Store> dal = new StoreDAL(getApplicationContext());
+				if(storesJSON != null && storesJSON.size() > 0) {
 					dal.clear();
-
-					dal.insert(stores);
+					dal.insert(storesJSON);
 				}
 			}
-			// If not, retrieve stores from database
-			else {	
-				DAL<Store> dal = new StoreDAL(getApplicationContext());
-				stores = dal.get();
-			}
 			
-			return stores;
+			return null;
 		}
-		
+
 		/***
 		 * Action is finished. Display the main activity.
 		 */
-		protected void onPostExecute(AbstractList<Store> results) {
+		protected void onPostExecute(Void result) {
 			Intent i = new Intent();
 			i.setClass(getApplicationContext(), MainActivity.class);
 			startActivity(i);
