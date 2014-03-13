@@ -22,6 +22,7 @@ public class StoreDAL extends DAL<Store> {
 	protected ContentValues convertInContentValues(Store entity) {
 
 		ContentValues values = new ContentValues();
+		values.put(StoreConstants.ID, 0);
 		values.put(StoreConstants.ADDRESS, entity.getAddress());
 		values.put(StoreConstants.CITY, entity.getCity());
 		values.put(StoreConstants.CODEMAG, entity.getCodeMag());
