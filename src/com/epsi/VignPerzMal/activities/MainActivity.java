@@ -7,13 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainActivity extends Activity implements OnClickListener {
 
 	private TextView tvZipCode;
-	private Button btnSearch;
-	private Button btnAroundMe;
+	private ImageButton btnSearch;
+	private ImageButton btnAroundMe;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -22,8 +23,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		
 		// Get controls
 		tvZipCode = (TextView)findViewById(R.id.tvZipCode);
-		btnSearch = (Button)findViewById(R.id.btnSearch);
-		btnAroundMe = (Button)findViewById(R.id.btnAroundMe);
+		btnSearch = (ImageButton)findViewById(R.id.btnSearch);
+		btnAroundMe = (ImageButton)findViewById(R.id.btnAroundMe);
 		
 		// Create events
 		btnSearch.setOnClickListener(this);
