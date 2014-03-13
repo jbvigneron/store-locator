@@ -10,8 +10,6 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.epsi.VignPerzMal.database.DAL;
-import com.epsi.VignPerzMal.database.StoreDAL;
 import com.epsi.VignPerzMal.forecast.ForecastFacade;
 import com.epsi.VignPerzMal.model.CurrentWeather;
 import com.epsi.VignPerzMal.model.Store;
@@ -25,12 +23,14 @@ public class DisplayStoreActivity  extends Activity implements OnClickListener {
 	private TextView tvPhoneNumber;
 	private ImageButton imgVoiceCall;
 	private TextView tvForeCast;
+	
+	private Store store;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_single_contact);
+		setContentView(R.layout.activity_display_store);
 
 		// Get all activity controls
 		tvStoreName = (TextView) findViewById(R.id.tvStoreName);
@@ -44,20 +44,14 @@ public class DisplayStoreActivity  extends Activity implements OnClickListener {
 		
 		// Retrieve values from previous intent
 		Intent in = getIntent();
+		store = in.getParcelableExtra(StoreConstants.STORE);
 
-		// Get values from precedent intents to set display values
-		String label = in.getStringExtra(StoreConstants.NAME);
-		tvStoreName.setText(label);
+		tvStoreName.setText(store.getName());
+		tvAddress.setText(store.getAddress());
+		tvPhoneNumber.setText(store.getPhone());
 		
-		String address = in.getStringExtra(StoreConstants.ADDRESS);
-		tvAddress.setText(address);
-		
-		String phone = in.getStringExtra(StoreConstants.PHONE);
-		tvPhoneNumber.setText(phone);
-		
-		int id = in.getIntExtra(StoreConstants.ID, 0);
-		AsyncTask<Integer, Void, Store> task = new GetStoreFromDbAsyncTask();
-		task.execute(id);
+		AsyncTask<Double, Void, CurrentWeather> task = new ForecastAsyncTask();
+		task.execute(store.getLatitude(), store.getLongitude());
 	}
 
 	@Override
@@ -67,28 +61,6 @@ public class DisplayStoreActivity  extends Activity implements OnClickListener {
 			Intent callIntent = new Intent(Intent.ACTION_CALL);
 			callIntent.setData(Uri.parse("tel:" + tvPhoneNumber.getText()));
 			startActivity(callIntent);
-		}
-	}
-
-	class GetStoreFromDbAsyncTask extends AsyncTask<Integer, Void, Store> {
-
-		protected void onPreExecute() {
-			// TODO: Show loading ring
-		}
-		
-		@Override
-		protected Store doInBackground(Integer... params) {
-			DAL<Store> dal = new StoreDAL(getApplicationContext());
-			
-			int id = params[0];
-			Store store = dal.get(id);
-			
-			return store;
-		}
-
-		protected void onPostExecute(Store result) {
-			AsyncTask<Double, Void, CurrentWeather> task = new ForecastAsyncTask();
-			task.execute(result.getLatitude(), result.getLongitude());
 		}
 	}
 	

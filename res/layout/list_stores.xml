@@ -7,10 +7,12 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp" >
  
+    <!-- Id hidden field -->
+   
+    
     <!-- Name Label -->
- 
     <TextView
-        android:id="@+id/libelle"
+        android:id="@+id/tvListName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="2dip"
@@ -21,7 +23,7 @@
  
     <!-- Email label -->
     <TextView
-        android:id="@+id/adresse"
+        android:id="@+id/tvListAddress"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="2dip"
@@ -29,11 +31,10 @@
  
     <!-- Mobile number label -->
     <TextView
-        android:id="@+id/phone"
+        android:id="@+id/tvListPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:text="Mobile: "
         android:textColor="#5d5d5d"
         android:textStyle="bold" />
  

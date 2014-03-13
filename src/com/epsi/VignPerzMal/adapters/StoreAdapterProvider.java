@@ -41,9 +41,9 @@ public class StoreAdapterProvider {
 		}
 
 		String[] from = new String[] { StoreConstants.NAME, StoreConstants.ADDRESS, StoreConstants.PHONE };
-		int[] to = new int[] { R.id.libelle, R.id.adresse, R.id.phone };
+		int[] to = new int[] { R.id.tvListName, R.id.tvListAddress, R.id.tvListPhone };
 
-		ListAdapter adapter = new SimpleAdapter(context, results, R.layout.list_item, from, to);
+		ListAdapter adapter = new SimpleAdapter(context, results, R.layout.list_stores, from, to);
 
 		return adapter;
 	}
