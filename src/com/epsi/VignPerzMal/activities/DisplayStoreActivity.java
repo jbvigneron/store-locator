@@ -57,12 +57,11 @@ public class DisplayStoreActivity extends Activity implements OnClickListener {
 		tvPhoneNumber.setText(store.getPhone());
 
 		AsyncTask<Double, Void, CurrentWeather> task = new ForecastAsyncTask();
-		task.execute(store.getLatitude(), store.getLongitude());
+		//task.execute(store.getLatitude(), store.getLongitude());
 	}
 
 	@Override
 	public void onClick(View v) {
-		// Call image
 		if(v == imgVoiceCall) {
 			Intent callIntent = new Intent(Intent.ACTION_CALL);
 			callIntent.setData(Uri.parse("tel:" + tvPhoneNumber.getText()));
