@@ -17,7 +17,7 @@
         android:padding="10px" >
 
         <EditText
-            android:id="@+id/tvZipCode"
+            android:id="@+id/etZipCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="6"

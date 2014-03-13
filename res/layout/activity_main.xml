@@ -16,7 +16,7 @@
         android:orientation="horizontal" >
 
         <EditText
-            android:id="@+id/tvZipCode"
+            android:id="@+id/etZipCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
