@@ -7,95 +7,91 @@
     tools:context=".accueil" >
 
     <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvStoreName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_phone" />
+
+            <TextView
+                android:id="@+id/tvPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:width="100dp" />
+
+            <ImageButton
+                android:id="@+id/imgVoiceCall"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:contentDescription="@string/label_voicecall"
+                android:src="@drawable/voicecall_128" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_address" />
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_schedule" />
+
+            <TextView
+                android:id="@+id/tvSchedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp" 
-        >
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" 
-            android:padding="10dp">
-          
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nom boutique" />
-
-            <TextView
-                android:id="@+id/tVNomStore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nom store"
-                android:textAppearance="?android:attr/textAppearanceLarge"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" 
-            android:padding="10dp" >
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Téléphone" />
-
-            <TextView
-                android:id="@+id/tVNumStore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="03.03.03.03.03"
-                android:textAppearance="?android:attr/textAppearanceLarge" 
-                android:layout_marginLeft="5dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp" >
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nom boutique" />
-
-            <TextView
-                android:id="@+id/tVAdresse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="rue de la poupée qui tousse, 62000 Arras"
-                android:textAppearance="?android:attr/textAppearanceLarge" 
-                android:layout_marginLeft="5dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp" >
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nom boutique" />
-
-            <TextView
-                android:id="@+id/tVHoraire"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10h-12 14h-19h"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginLeft="5dp" />
-        </LinearLayout>
+        android:layout_alignLeft="@+id/linearLayout1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp" >
     </LinearLayout>
 
 </RelativeLayout>
