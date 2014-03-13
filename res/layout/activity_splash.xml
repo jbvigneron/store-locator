@@ -9,6 +9,8 @@
     android:background="@drawable/fond_appli"
     tools:context=".Splash" >
 
+    
+    
     <ProgressBar
         android:id="@+id/pbSplash"
         style="?android:attr/progressBarStyleLarge"
@@ -16,5 +18,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="458dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
+        android:src="@drawable/titre" />
 
 </RelativeLayout>

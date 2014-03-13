@@ -14,7 +14,7 @@ public class Splash extends Activity {
 	/** Durée d'affichage du SplashScreen */
 	protected int _splashTime = 5000; 
 	
-	
+	//modifier le manifest pour qu'il n'y est d'un unique lanceur  
 
 	private Thread splashTread;
 
