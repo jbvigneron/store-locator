@@ -121,11 +121,13 @@ public class Store implements Parcelable {
 	
 	public static final Parcelable.Creator<Store> CREATOR
     = new Parcelable.Creator<Store>() {
-        public Store createFromParcel(Parcel in) {
+        @Override
+		public Store createFromParcel(Parcel in) {
             return new Store(in);
         }
 
-        public Store[] newArray(int size) {
+        @Override
+		public Store[] newArray(int size) {
             return new Store[size];
         }
     };

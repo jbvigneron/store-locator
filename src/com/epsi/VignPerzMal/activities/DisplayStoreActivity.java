@@ -22,7 +22,9 @@ public class DisplayStoreActivity extends Activity implements OnClickListener {
 	private TextView tvAddress;
 	private TextView tvPhoneNumber;
 	private ImageButton imgVoiceCall;
+	private TextView tvSchedule;
 	private TextView tvForeCast;
+
 
 	private Store store;
 
@@ -37,6 +39,7 @@ public class DisplayStoreActivity extends Activity implements OnClickListener {
 		tvAddress = (TextView) findViewById(R.id.tvAddress);
 		tvPhoneNumber = (TextView) findViewById(R.id.tvPhoneNumber);
 		imgVoiceCall = (ImageButton) findViewById(R.id.imgVoiceCall);
+		tvSchedule = (TextView) findViewById(R.id.tvSchedule);
 		tvForeCast = (TextView) findViewById(R.id.tvForecast);
 
 		// Create events
@@ -53,8 +56,9 @@ public class DisplayStoreActivity extends Activity implements OnClickListener {
 		store = in.getParcelableExtra(StoreConstants.STORE);
 
 		tvStoreName.setText(store.getName());
-		tvAddress.setText(store.getAddress());
+		tvAddress.setText(store.getAddress()+", "+store.getZipCode()+" "+store.getCity());
 		tvPhoneNumber.setText(store.getPhone());
+		tvSchedule.setText(store.getSchedule().replace("<br />", "\n"));
 
 		AsyncTask<Double, Void, CurrentWeather> task = new ForecastAsyncTask();
 		//task.execute(store.getLatitude(), store.getLongitude());
@@ -78,6 +82,7 @@ public class DisplayStoreActivity extends Activity implements OnClickListener {
 			return weather;
 		}
 
+		@Override
 		protected void onPostExecute(CurrentWeather result) {
 			tvForeCast.setText(result.toString());
 
