@@ -43,7 +43,7 @@ public class SearchActivity extends ListActivity {
 				String phone = ((TextView) view.findViewById(R.id.phone)).getText().toString();
 
 				// Starting single contact activity
-				Intent in = new Intent(getApplicationContext(), SingleContactActivity.class);
+				Intent in = new Intent(getApplicationContext(), DisplayStoreActivity.class);
 				in.putExtra(StoreTags.LABEL, libelle);
 				in.putExtra(StoreTags.ADDRESS, adresse);
 				in.putExtra(StoreTags.PHONE, phone);
