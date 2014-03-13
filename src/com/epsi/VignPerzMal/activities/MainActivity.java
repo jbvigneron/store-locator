@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener {
 
@@ -79,7 +80,14 @@ public class MainActivity extends Activity implements OnClickListener {
 	private void searchbyZipCode() {
 		
 		String zipCode = etZipCode.getText().toString();
-		stores = dal.search(zipCode);
+		
+		if(zipCode.length() == 5)
+			stores = dal.search(zipCode);
+		else if(zipCode.length() == 0)
+			stores = dal.get();
+		else
+			Toast.makeText(getApplicationContext(), R.string.message_enter_zip_code,
+					   Toast.LENGTH_LONG).show();
 		
 		displayStores();
 	}
