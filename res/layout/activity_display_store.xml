@@ -99,11 +99,18 @@
             android:layout_height="wrap_content"
             android:text="@string/label_forecast" />
 
+        <ProgressBar
+            android:id="@+id/pbForecast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/tvForecast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+
     </LinearLayout>
 
 </RelativeLayout>
