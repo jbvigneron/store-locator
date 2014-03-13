@@ -3,16 +3,20 @@ package com.epsi.VignPerzMal.activities;
 import java.util.AbstractList;
 import java.util.ArrayList;
 
-import com.epsi.VignPerzMal.adapters.StoreAdapterProvider;
+import com.epsi.VignPerzMal.adapters.StoreAdapter;
 import com.epsi.VignPerzMal.database.DAL;
 import com.epsi.VignPerzMal.database.StoreDAL;
 import com.epsi.VignPerzMal.model.Store;
 import com.epsi.VignPerzMal.storelocator.R;
+import com.epsi.VignPerzMal.storesparser.StoreConstants;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
@@ -20,7 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity extends Activity implements OnClickListener, OnItemClickListener {
 
 	private TextView etZipCode;
 	private ImageButton btnSearch;
@@ -50,6 +54,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		btnSearch.setOnClickListener(this);
 		btnAroundMe.setOnClickListener(this);
 		btnMap.setOnClickListener(this);
+		lvStores.setOnItemClickListener(this);
 	}
 
 	@Override
@@ -71,9 +76,20 @@ public class MainActivity extends Activity implements OnClickListener {
 			showMap();
 	}
 	
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		
+		ListView v = (ListView)parent;
+		Store selStore = (Store)v.getItemAtPosition(position);
+		
+		Intent in = new Intent(getApplicationContext(), DisplayStoreActivity.class);
+		in.putExtra(StoreConstants.STORE, selStore);
+		startActivity(in);
+	}
+	
 	private void displayStores() {
-		StoreAdapterProvider adapterProvider = new StoreAdapterProvider();
-		ListAdapter adapter = adapterProvider.adapt(getApplicationContext(), stores);
+		
+		ListAdapter adapter = new StoreAdapter(getApplicationContext(), stores);
 		lvStores.setAdapter(adapter);
 	}
 	

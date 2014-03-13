@@ -10,15 +10,13 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.epsi.VignPerzMal.database.DAL;
-import com.epsi.VignPerzMal.database.StoreDAL;
 import com.epsi.VignPerzMal.forecast.ForecastFacade;
 import com.epsi.VignPerzMal.model.CurrentWeather;
 import com.epsi.VignPerzMal.model.Store;
 import com.epsi.VignPerzMal.storelocator.R;
 import com.epsi.VignPerzMal.storesparser.StoreConstants;
 
-public class DisplayStoreActivity  extends Activity implements OnClickListener {
+public class DisplayStoreActivity extends Activity implements OnClickListener {
 
 	private TextView tvStoreName;
 	private TextView tvAddress;
@@ -26,11 +24,13 @@ public class DisplayStoreActivity  extends Activity implements OnClickListener {
 	private ImageButton imgVoiceCall;
 	private TextView tvForeCast;
 
+	private Store store;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_single_contact);
+		setContentView(R.layout.activity_display_store);
 
 		// Get all activity controls
 		tvStoreName = (TextView) findViewById(R.id.tvStoreName);
@@ -41,28 +41,27 @@ public class DisplayStoreActivity  extends Activity implements OnClickListener {
 
 		// Create events
 		imgVoiceCall.setOnClickListener(this);
-		
+	}
+
+	@Override
+	protected void onStart() {
+
+		super.onStart();
+
 		// Retrieve values from previous intent
 		Intent in = getIntent();
+		store = in.getParcelableExtra(StoreConstants.STORE);
 
-		// Get values from precedent intents to set display values
-		String label = in.getStringExtra(StoreConstants.NAME);
-		tvStoreName.setText(label);
-		
-		String address = in.getStringExtra(StoreConstants.ADDRESS);
-		tvAddress.setText(address);
-		
-		String phone = in.getStringExtra(StoreConstants.PHONE);
-		tvPhoneNumber.setText(phone);
-		
-		int id = in.getIntExtra(StoreConstants.ID, 0);
-		AsyncTask<Integer, Void, Store> task = new GetStoreFromDbAsyncTask();
-		task.execute(id);
+		tvStoreName.setText(store.getName());
+		tvAddress.setText(store.getAddress());
+		tvPhoneNumber.setText(store.getPhone());
+
+		AsyncTask<Double, Void, CurrentWeather> task = new ForecastAsyncTask();
+		//task.execute(store.getLatitude(), store.getLongitude());
 	}
 
 	@Override
 	public void onClick(View v) {
-		// Call image
 		if(v == imgVoiceCall) {
 			Intent callIntent = new Intent(Intent.ACTION_CALL);
 			callIntent.setData(Uri.parse("tel:" + tvPhoneNumber.getText()));
@@ -70,28 +69,6 @@ public class DisplayStoreActivity  extends Activity implements OnClickListener {
 		}
 	}
 
-	class GetStoreFromDbAsyncTask extends AsyncTask<Integer, Void, Store> {
-
-		protected void onPreExecute() {
-			// TODO: Show loading ring
-		}
-		
-		@Override
-		protected Store doInBackground(Integer... params) {
-			DAL<Store> dal = new StoreDAL(getApplicationContext());
-			
-			int id = params[0];
-			Store store = dal.get(id);
-			
-			return store;
-		}
-
-		protected void onPostExecute(Store result) {
-			AsyncTask<Double, Void, CurrentWeather> task = new ForecastAsyncTask();
-			task.execute(result.getLatitude(), result.getLongitude());
-		}
-	}
-	
 	class ForecastAsyncTask extends AsyncTask<Double, Void, CurrentWeather> {
 
 		@Override
@@ -103,7 +80,7 @@ public class DisplayStoreActivity  extends Activity implements OnClickListener {
 
 		protected void onPostExecute(CurrentWeather result) {
 			tvForeCast.setText(result.toString());
-			
+
 			// TODO: Hide loading ring
 		}
 	}
