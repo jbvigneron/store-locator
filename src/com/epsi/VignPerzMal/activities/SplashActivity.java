@@ -1,6 +1,7 @@
-package com.epsi.VignPerzMal.storelocator;
+package com.epsi.VignPerzMal.activities;
 
-import com.epsi.VignPerzMal.activities.MainActivity;
+import com.epsi.VignPerzMal.storelocator.R;
+import com.epsi.VignPerzMal.storelocator.R.layout;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -9,7 +10,7 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.widget.ProgressBar;
 
-public class Splash extends Activity {
+public class SplashActivity extends Activity {
 
 	/** Durée d'affichage du SplashScreen */
 	protected int _splashTime = 5000; 
@@ -27,7 +28,7 @@ public class Splash extends Activity {
 
 		
 		
-		final Splash sPlashScreen = this; 
+		final SplashActivity sPlashScreen = this; 
 
 		/** Thread pour l'affichage du SplashScreen */
 		splashTread = new Thread() 
