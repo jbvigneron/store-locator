@@ -46,7 +46,7 @@ public class DisplayStoreActivity  extends Activity implements OnClickListener {
 		Intent in = getIntent();
 
 		// Get values from precedent intents to set display values
-		String label = in.getStringExtra(StoreConstants.LABEL);
+		String label = in.getStringExtra(StoreConstants.NAME);
 		tvStoreName.setText(label);
 		
 		String address = in.getStringExtra(StoreConstants.ADDRESS);

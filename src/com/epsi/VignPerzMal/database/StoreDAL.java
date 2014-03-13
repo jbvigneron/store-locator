@@ -15,21 +15,33 @@ public class StoreDAL extends DAL<Store> {
 	public StoreDAL(Context context) {
 		super(context);
 
-		columns = new String[] {StoreConstants.ID, StoreConstants.CODEMAG, StoreConstants.ADDRESS, StoreConstants.ZIPCODE, StoreConstants.CITY, StoreConstants.PHONE, StoreConstants.SCHEDULE, StoreConstants.FAX, StoreConstants.LATITUDE, StoreConstants.LONGITUDE };
+		columns = new String[]
+		{
+				StoreConstants.ID,
+				StoreConstants.CODEMAG,
+				StoreConstants.NAME,
+				StoreConstants.ADDRESS,
+				StoreConstants.ZIPCODE,
+				StoreConstants.CITY,
+				StoreConstants.PHONE,
+				StoreConstants.SCHEDULE,
+				StoreConstants.FAX,
+				StoreConstants.LATITUDE,
+				StoreConstants.LONGITUDE
+		};
 	}
 
 	@Override
 	protected ContentValues convertInContentValues(Store entity) {
 
 		ContentValues values = new ContentValues();
-		values.put(StoreConstants.ID, 0);
 		values.put(StoreConstants.ADDRESS, entity.getAddress());
 		values.put(StoreConstants.CITY, entity.getCity());
 		values.put(StoreConstants.CODEMAG, entity.getCodeMag());
 		values.put(StoreConstants.FAX, entity.getFax());
 		values.put(StoreConstants.LATITUDE, entity.getLatitude());
 		values.put(StoreConstants.LONGITUDE, entity.getLongitude());
-		values.put(StoreConstants.LABEL, entity.getName());
+		values.put(StoreConstants.NAME, entity.getName());
 		values.put(StoreConstants.PHONE, entity.getPhone());
 		values.put(StoreConstants.SCHEDULE, entity.getSchedule());
 		values.put(StoreConstants.ZIPCODE, entity.getZipCode());

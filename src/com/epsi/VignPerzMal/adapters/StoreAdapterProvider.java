@@ -31,7 +31,7 @@ public class StoreAdapterProvider {
 
 				// adding each child node to HashMap key => value
 				result.put(StoreConstants.CODEMAG, store.getCodeMag());
-				result.put(StoreConstants.LABEL, store.getName());
+				result.put(StoreConstants.NAME, store.getName());
 				result.put(StoreConstants.ADDRESS, store.getAddress());
 				result.put(StoreConstants.PHONE, store.getPhone());
 
@@ -40,7 +40,7 @@ public class StoreAdapterProvider {
 			}
 		}
 
-		String[] from = new String[] { StoreConstants.LABEL, StoreConstants.ADDRESS, StoreConstants.PHONE };
+		String[] from = new String[] { StoreConstants.NAME, StoreConstants.ADDRESS, StoreConstants.PHONE };
 		int[] to = new int[] { R.id.libelle, R.id.adresse, R.id.phone };
 
 		ListAdapter adapter = new SimpleAdapter(context, results, R.layout.list_item, from, to);

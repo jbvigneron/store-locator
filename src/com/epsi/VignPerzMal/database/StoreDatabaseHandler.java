@@ -16,7 +16,7 @@ class StoreDatabaseHandler extends SQLiteOpenHelper {
 	private String scriptCreateDb = "CREATE TABLE " + TABLE_NAME + " ("
 	+ StoreConstants.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 	+ StoreConstants.CODEMAG + " TEXT, "
-	+ StoreConstants.LABEL + " TEXT, " 
+	+ StoreConstants.NAME + " TEXT, " 
 	+ StoreConstants.ADDRESS + " TEXT, "
 	+ StoreConstants.ZIPCODE + " TEXT, "
 	+ StoreConstants.CITY + " TEXT, "

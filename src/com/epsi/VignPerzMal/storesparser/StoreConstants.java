@@ -9,7 +9,7 @@ public class StoreConstants {
 	
 	public static final String ID = "Id";
 	public static final String CODEMAG = "CodeMAG";
-	public static final String LABEL = "Libelle";
+	public static final String NAME = "Libelle";
 	public static final String ADDRESS = "Adresse1";
 	public static final String ZIPCODE = "CodePostal";
 	public static final String CITY = "Ville";

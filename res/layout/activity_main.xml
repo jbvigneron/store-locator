@@ -7,7 +7,7 @@
     tools:context=".accueil" >
 
     <LinearLayout
-        android:id="@+id/lLShearchText"
+        android:id="@+id/llsearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -23,7 +23,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:ems="6"
-            android:hint="CP"
+            android:hint="@string/label_zipcode"
             android:inputType="text"
             android:maxLength="5"
             android:padding="10dp" />
@@ -32,13 +32,16 @@
             android:id="@+id/btnSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/label_search"
             android:src="@drawable/trouver_recherche_icone_128" />
 
         <ImageButton
             android:id="@+id/btnAroundMe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/label_aroundme"
             android:src="@drawable/cible" />
+
     </LinearLayout>
 
     <Button
@@ -47,9 +50,9 @@
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/lLShearchText"
+        android:layout_below="@+id/llsearch"
         android:layout_marginLeft="10dp"
-        android:text="Liste" />
+        android:text="@string/label_list" />
 
     <Button
         android:id="@+id/btnMap"
@@ -57,12 +60,12 @@
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/lLShearchText"
+        android:layout_below="@+id/llsearch"
         android:layout_marginRight="10dp"
-        android:text="Carte" />
+        android:text="@string/label_map" />
 
     <ListView
-        android:id="@+id/listView1"
+        android:id="@+id/lvStores"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnList"
