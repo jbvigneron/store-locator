@@ -7,7 +7,7 @@ import com.epsi.VignPerzMal.model.CurrentWeather;
 
 public class ForecastFacade {
 
-	public CurrentWeather get(float latitude, float longitude) {
+	public CurrentWeather get(double latitude, double longitude) {
 		JsonDownloader downloader = new JsonDownloader();
 
 		String url = String.format(Locale.getDefault(), ForecastConstants.URL, latitude, longitude);

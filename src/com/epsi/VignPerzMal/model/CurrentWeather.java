@@ -80,4 +80,9 @@ public class CurrentWeather
 	public void setWinds(AbstractList<Wind> winds) {
 		this.winds = winds;
 	}
+
+	@Override
+	public String toString() {
+		return temp + "°" + temp_unit.toUpperCase() + " - " + weather_text;
+	}
 }
