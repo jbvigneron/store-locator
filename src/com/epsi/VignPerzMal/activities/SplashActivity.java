@@ -57,6 +57,7 @@ public class SplashActivity extends Activity {
 		/***
 		 * Action is finished. Display the main activity.
 		 */
+		@Override
 		protected void onPostExecute(Void result) {
 			Intent i = new Intent();
 			i.setClass(getApplicationContext(), MainActivity.class);

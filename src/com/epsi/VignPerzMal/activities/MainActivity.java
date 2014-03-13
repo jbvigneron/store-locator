@@ -35,6 +35,7 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 	private DAL<Store> dal;
 	private AbstractList<Store> stores;
 
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
