@@ -16,14 +16,14 @@ import com.epsi.VignPerzMal.model.Store;
 import com.epsi.VignPerzMal.storelocator.R;
 import com.epsi.VignPerzMal.storesparser.StoreConstants;
 
-public class DisplayStoreActivity  extends Activity implements OnClickListener {
+public class DisplayStoreActivity extends Activity implements OnClickListener {
 
 	private TextView tvStoreName;
 	private TextView tvAddress;
 	private TextView tvPhoneNumber;
 	private ImageButton imgVoiceCall;
 	private TextView tvForeCast;
-	
+
 	private Store store;
 
 	@Override
@@ -41,7 +41,13 @@ public class DisplayStoreActivity  extends Activity implements OnClickListener {
 
 		// Create events
 		imgVoiceCall.setOnClickListener(this);
-		
+	}
+
+	@Override
+	protected void onStart() {
+
+		super.onStart();
+
 		// Retrieve values from previous intent
 		Intent in = getIntent();
 		store = in.getParcelableExtra(StoreConstants.STORE);
@@ -49,7 +55,7 @@ public class DisplayStoreActivity  extends Activity implements OnClickListener {
 		tvStoreName.setText(store.getName());
 		tvAddress.setText(store.getAddress());
 		tvPhoneNumber.setText(store.getPhone());
-		
+
 		AsyncTask<Double, Void, CurrentWeather> task = new ForecastAsyncTask();
 		task.execute(store.getLatitude(), store.getLongitude());
 	}
@@ -63,7 +69,7 @@ public class DisplayStoreActivity  extends Activity implements OnClickListener {
 			startActivity(callIntent);
 		}
 	}
-	
+
 	class ForecastAsyncTask extends AsyncTask<Double, Void, CurrentWeather> {
 
 		@Override
@@ -75,7 +81,7 @@ public class DisplayStoreActivity  extends Activity implements OnClickListener {
 
 		protected void onPostExecute(CurrentWeather result) {
 			tvForeCast.setText(result.toString());
-			
+
 			// TODO: Hide loading ring
 		}
 	}

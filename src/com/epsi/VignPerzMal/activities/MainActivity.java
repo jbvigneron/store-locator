@@ -3,7 +3,7 @@ package com.epsi.VignPerzMal.activities;
 import java.util.AbstractList;
 import java.util.ArrayList;
 
-import com.epsi.VignPerzMal.adapters.StoreAdapterProvider;
+import com.epsi.VignPerzMal.adapters.StoreAdapter;
 import com.epsi.VignPerzMal.database.DAL;
 import com.epsi.VignPerzMal.database.StoreDAL;
 import com.epsi.VignPerzMal.model.Store;
@@ -88,8 +88,8 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 	}
 	
 	private void displayStores() {
-		StoreAdapterProvider adapterProvider = new StoreAdapterProvider();
-		ListAdapter adapter = adapterProvider.adapt(getApplicationContext(), stores);
+		
+		ListAdapter adapter = new StoreAdapter(getApplicationContext(), stores);
 		lvStores.setAdapter(adapter);
 	}
 	
