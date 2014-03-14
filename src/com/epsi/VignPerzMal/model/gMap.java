@@ -18,18 +18,22 @@ import android.widget.Toast;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class gMap implements LocationListener {
+public class gMap implements LocationListener, OnMapLongClickListener, OnInfoWindowClickListener {
 
 	private Context context;
 
 
 	static final LatLng PARIS = new LatLng(48.856614,2.3522219000000177);
 
+	
 	public gMap(Context ctx , GoogleMap pMap)
 	{
 		this.context = ctx;
@@ -112,19 +116,19 @@ public class gMap implements LocationListener {
 		Map<Integer,Float> h = new TreeMap<Integer,Float>();
 		Location myLoc = getMyLocation();
 		Location locationA = new Location("");
-		
-		
+
+
 		if(allstores != null) {
 			for(Store store : allstores) {
-				 
-				 locationA.setLatitude(store.getLatitude());
-				 locationA.setLongitude(store.getLongitude());
-				 
-				 float distance = myLoc.distanceTo(locationA) / 1000;
-				 
-				 Toast.makeText(context,String.valueOf(distance), Toast.LENGTH_LONG).show();
-				 h.put(store.getId(), distance); 
-				
+
+				locationA.setLatitude(store.getLatitude());
+				locationA.setLongitude(store.getLongitude());
+
+				float distance = myLoc.distanceTo(locationA) / 1000;
+
+				Toast.makeText(context,String.valueOf(distance), Toast.LENGTH_LONG).show();
+				h.put(store.getId(), distance); 
+
 			}
 		}
 
@@ -162,6 +166,18 @@ public class gMap implements LocationListener {
 	public void onLocationChanged(Location arg0) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void onInfoWindowClick(Marker arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onMapLongClick(LatLng arg0) {
+		// TODO Auto-generated method stub
+		
 	}   	
 
 	//	Location sydney = new Location("23 rue du dépot 62000 Arras");
