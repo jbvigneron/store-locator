@@ -92,13 +92,11 @@ public class StoreDAL extends DAL<Store> {
 
 		db = helper.getReadableDatabase();
 
-		AbstractList<Store> stores = null;
+		AbstractList<Store> stores = new ArrayList<Store>();
 
 		Cursor cursor = db.query(StoreDatabaseHandler.TABLE_NAME, columns, null, null, null, null, null);
 
 		if(cursor.moveToFirst()) {
-			stores = new ArrayList<Store>();
-
 			do {
 				Store store = extractEntity(cursor);
 				stores.add(store);
@@ -116,14 +114,12 @@ public class StoreDAL extends DAL<Store> {
 
 		db = helper.getReadableDatabase();
 
-		AbstractList<Store> stores = null;
+		AbstractList<Store> stores = new ArrayList<Store>();
 
 		String whereClause = StoreConstants.ZIPCODE +"=" + zipCode;
 		Cursor cursor = db.query(StoreDatabaseHandler.TABLE_NAME, columns, whereClause, null, null, null, null);
 
 		if(cursor.moveToFirst()) {
-			stores = new ArrayList<Store>();
-
 			do {
 				Store store = extractEntity(cursor);
 				stores.add(store);
