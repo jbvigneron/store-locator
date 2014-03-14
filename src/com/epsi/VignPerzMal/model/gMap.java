@@ -2,6 +2,7 @@ package com.epsi.VignPerzMal.model;
 
 import java.io.IOException;
 import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -70,14 +71,14 @@ public class gMap implements LocationListener, OnMapLongClickListener, OnInfoWin
 	{
 		LocationManager service = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 		boolean enabledGPS = service.isProviderEnabled(LocationManager.GPS_PROVIDER);
-		
+
 		//boolean enabledWiFi = service.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
 		// Check if enabled and if not send user to the GSP settings
 		// Better solution would be to display a dialog and suggesting to 
 		// go to the settings
 		if (!enabledGPS) {
-			Toast.makeText(context, "GPS signal not found", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, "GPS signal not found", Toast.LENGTH_SHORT).show();
 			//Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 			//startActivity(intent);
 		}
@@ -101,35 +102,38 @@ public class gMap implements LocationListener, OnMapLongClickListener, OnInfoWin
 			//do something
 		}
 		String test = "Dernière connue:" + getAddress(myLocation.getLatitude(),myLocation.getLongitude());
-		Toast.makeText(context, test, Toast.LENGTH_LONG).show();
+		Toast.makeText(context, test, Toast.LENGTH_SHORT).show();
 
 
 		return myLocation;
 
 	}
 
-	public TreeMap<Integer,Float> getNearestStoresOnMap( AbstractList<Store> allstores)
+	@SuppressWarnings("null")
+	public AbstractList<Store> getNearestStoresOnMap( AbstractList<Store> allstores)
 	{
-		Map<Integer,Float> h = new TreeMap<Integer,Float>();
+
 		Location myLoc = getMyLocation();
 		Location locationA = new Location("");
-
+		AbstractList<Store> storesList = new ArrayList<Store>();
 
 		if(allstores != null) {
 			for(Store store : allstores) {
 
-				locationA.setLatitude(store.getLatitude());
-				locationA.setLongitude(store.getLongitude());
+				if(store != null)
+				{
+					locationA.setLatitude(store.getLatitude());
+					locationA.setLongitude(store.getLongitude());
 
-				float distance = myLoc.distanceTo(locationA) / 1000;
+					float distance = myLoc.distanceTo(locationA) / 1000;
 
-				Toast.makeText(context,String.valueOf(distance), Toast.LENGTH_LONG).show();
-				h.put(store.getId(), distance); 
-
+					if (distance < 50.00)
+						storesList.add(store);
+				}
 			}
 		}
 
-		return (TreeMap<Integer, Float>) h;
+		return storesList;
 
 	}
 
@@ -168,20 +172,11 @@ public class gMap implements LocationListener, OnMapLongClickListener, OnInfoWin
 	@Override
 	public void onInfoWindowClick(Marker arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onMapLongClick(LatLng arg0) {
 		// TODO Auto-generated method stub
-		
 	}   	
-
-	//	Location sydney = new Location("23 rue du dépot 62000 Arras");
-
-	//String test = getAddress(53.558, 9.927);
-	//Toast.makeText(this, test, Toast.LENGTH_LONG).show();
-
-	//float test = map.getMyLocation().distanceTo(sydney);
-
 }

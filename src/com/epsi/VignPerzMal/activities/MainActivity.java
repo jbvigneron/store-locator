@@ -61,6 +61,10 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 		btnList = (Button)findViewById(R.id.btnList);
 		
 		MapFragment fragment = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
+		
+		View fragmentLayout =   findViewById(R.id.map);
+		fragmentLayout.setVisibility(View.INVISIBLE);
+		
 		map = fragment.getMap();
 		map.setMyLocationEnabled(true);
 		map.getUiSettings().setMyLocationButtonEnabled(true);
@@ -151,19 +155,23 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 		displayStores();
 	}
 	
+	/* get nerarest stores from location */
 	private void searchAroundMe() {
 		
-		TreeMap<Integer,Float> listNear = myMap.getNearestStoresOnMap(dal.get());
-		myMap.setStoresOnMap(map , stores);
+		AbstractList<Store> abstores = myMap.getNearestStoresOnMap(dal.get());
+		myMap.setStoresOnMap(map , abstores);
+		stores = myMap.getNearestStoresOnMap(dal.get());
+		displayStores();
 	}
 
+	/* Display Map on bouton click */
 	private void showMap() {
 
-		ListView listviewLayout =  (ListView) findViewById(R.id.lvStores);
-		listviewLayout.setVisibility(View.GONE);
-		
 		View fragmentLayout = findViewById(R.id.map);
 		fragmentLayout.setVisibility(View.VISIBLE);
+		
+		ListView listviewLayout =  (ListView) findViewById(R.id.lvStores);
+		listviewLayout.setVisibility(View.GONE);
 		
 		String zipCode = etZipCode.getText().toString();
 
