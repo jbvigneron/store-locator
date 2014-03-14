@@ -21,6 +21,7 @@ public class SplashActivity extends Activity {
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
+		setTitle(R.string.title_activity_splash);
 
 		AsyncTask<Void, Void, Void> task = new LoadStoresAsyncTask();
 		task.execute();

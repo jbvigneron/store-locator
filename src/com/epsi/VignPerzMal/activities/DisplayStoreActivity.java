@@ -35,6 +35,7 @@ public class DisplayStoreActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_display_store);
+		setTitle(R.string.title_activity_display_store);
 
 		// Get all activity controls
 		tvStoreName = (TextView) findViewById(R.id.tvStoreName);
