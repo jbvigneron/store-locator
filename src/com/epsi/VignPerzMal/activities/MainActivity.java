@@ -15,9 +15,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -52,6 +54,8 @@ public class MainActivity extends Activity implements OnClickListener, OnTouchLi
 		map.setMyLocationEnabled(true);
 		map.getUiSettings().setMyLocationButtonEnabled(true);
 
+	
+		
 		dal = new StoreDAL(getApplicationContext());
 		stores = new ArrayList<Store>();
 
