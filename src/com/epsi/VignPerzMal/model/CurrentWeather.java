@@ -1,6 +1,6 @@
 package com.epsi.VignPerzMal.model;
 
-import java.util.AbstractList;
+import java.util.Locale;
 
 public class CurrentWeather
 {
@@ -10,10 +10,10 @@ public class CurrentWeather
 	private String temp_unit;
 	private int weather_code;
 	private String weather_text;
-	private AbstractList<Wind> winds;
+	private Wind wind;
 
 	public CurrentWeather(int humidity, int pressure, int temp, String temp_unit,
-			int weather_code, String weather_text, AbstractList<Wind> winds) {
+			int weather_code, String weather_text, Wind wind) {
 		super();
 
 		this.humidity = humidity;
@@ -22,7 +22,7 @@ public class CurrentWeather
 		this.temp_unit = temp_unit;
 		this.weather_code = weather_code;
 		this.weather_text = weather_text;
-		this.winds = winds;
+		this.wind = wind;
 	}
 
 	public int getHumidity() {
@@ -73,16 +73,16 @@ public class CurrentWeather
 		this.weather_text = weather_text;
 	}
 	
-	public AbstractList<Wind> getWinds() {
-		return winds;
+	public Wind getWind() {
+		return wind;
 	}
 	
-	public void setWinds(AbstractList<Wind> winds) {
-		this.winds = winds;
+	public void setWinds(Wind wind) {
+		this.wind = wind;
 	}
 
 	@Override
 	public String toString() {
-		return temp + "°" + temp_unit.toUpperCase() + " - " + weather_text;
+		return temp + "°" + temp_unit.toUpperCase(Locale.getDefault()) + " - " + weather_text;
 	}
 }
