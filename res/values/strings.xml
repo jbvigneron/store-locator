@@ -18,5 +18,4 @@
     <string name="label_list">Liste</string>
     <string name="label_map">Carte</string>
     <string name="message_enter_zip_code">Entrez un code postal valide.</string>
-    <string name="title_activity_maps">Rechercher par carte</string>
 </resources>

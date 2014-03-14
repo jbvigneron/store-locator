@@ -48,7 +48,6 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_main);
-		setTitle(R.string.title_activity_main);
 		
 		dal = new StoreDAL(getApplicationContext());
 		stores = new ArrayList<Store>();
