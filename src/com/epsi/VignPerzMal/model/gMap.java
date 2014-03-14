@@ -1,9 +1,7 @@
 package com.epsi.VignPerzMal.model;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.AbstractList;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -109,8 +107,7 @@ public class gMap implements LocationListener {
 
 	}
 
-	@SuppressWarnings("null")
-	public  TreeMap<Integer,Float> getNearestStoresOnMap( AbstractList<Store> allstores)
+	public TreeMap<Integer,Float> getNearestStoresOnMap( AbstractList<Store> allstores)
 	{
 		Map<Integer,Float> h = new TreeMap<Integer,Float>();
 		Location myLoc = getMyLocation();
