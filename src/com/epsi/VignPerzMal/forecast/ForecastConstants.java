@@ -6,7 +6,6 @@ public class ForecastConstants {
 	
 	// Wind
 	public static final String DIR = "dir";
-	public static final String DIR_DEGREE = "dir_degree";
 	public static final String SPEED = "speed";
 	public static final String WIND_UNIT = "wind_unit";
 	
