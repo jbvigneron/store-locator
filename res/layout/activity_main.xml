@@ -52,6 +52,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/llsearch"
         android:layout_marginLeft="10dp"
+        android:enabled="true"
         android:text="@string/label_list" />
 
     <Button
