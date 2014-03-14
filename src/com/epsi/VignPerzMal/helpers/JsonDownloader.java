@@ -30,6 +30,7 @@ public class JsonDownloader {
 
 		HttpClient client = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(url);
+		httpGet.addHeader("accept", "application/json");
 
 		try {
 			HttpResponse response = client.execute(httpGet);
