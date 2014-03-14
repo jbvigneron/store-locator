@@ -159,9 +159,14 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 	private void searchAroundMe() {
 		
 		AbstractList<Store> abstores = myMap.getNearestStoresOnMap(dal.get());
+		if (abstores != null)
+		{
 		myMap.setStoresOnMap(map , abstores);
 		stores = myMap.getNearestStoresOnMap(dal.get());
 		displayStores();
+		}
+		else
+			Toast.makeText(this, "wifi inactif", Toast.LENGTH_SHORT).show();
 	}
 
 	/* Display Map on bouton click */

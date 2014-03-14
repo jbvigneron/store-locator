@@ -9,11 +9,13 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.widget.Toast;
 
 import com.google.android.gms.location.LocationListener;
@@ -52,6 +54,23 @@ public class gMap implements LocationListener, OnMapLongClickListener, OnInfoWin
 				.snippet(store.getPhone())
 				.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
+				 map.setOnInfoWindowClickListener(new OnInfoWindowClickListener()
+	                {
+					 
+						@Override
+						public void onInfoWindowClick(Marker m) {
+							// TODO Auto-generated method stub
+							// Go to Google Map using GPS
+							
+							double latDest = m.getPosition().latitude;
+							double longDest = m.getPosition().longitude;
+							Location localLoc = getMyLocation();
+							String url = "http://maps.google.com/maps?saddr="+localLoc.getLatitude()+","+localLoc.getLongitude()+"&daddr="+latDest+","+longDest+"&mode=driving";
+							Intent intent = new Intent(android.content.Intent.ACTION_VIEW,Uri.parse(url));
+							context.startActivity(intent);
+						}
+
+	                }); 
 				//add marquers to calculate bounds of the map
 				LatLng ll = new LatLng(store.getLatitude(), store.getLongitude());
 				bld.include(ll);   
@@ -71,41 +90,49 @@ public class gMap implements LocationListener, OnMapLongClickListener, OnInfoWin
 	{
 		LocationManager service = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 		boolean enabledGPS = service.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		boolean enabledWiFi = service.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
-		//boolean enabledWiFi = service.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+		if(enabledWiFi)
+		{
+			// Check if enabled and if not send user to the GSP settings
+			// Better solution would be to display a dialog and suggesting to 
+			// go to the settings
+			if (!enabledGPS) {
+				//Toast.makeText(context, "GPS signal not found", Toast.LENGTH_SHORT).show();
+				//Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+				//startActivity(intent);
+			}
 
-		// Check if enabled and if not send user to the GSP settings
-		// Better solution would be to display a dialog and suggesting to 
-		// go to the settings
-		if (!enabledGPS) {
-			Toast.makeText(context, "GPS signal not found", Toast.LENGTH_SHORT).show();
-			//Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-			//startActivity(intent);
+
+			LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+			// Define the criteria how to select the location provider -> use
+			// default
+			Criteria criteria = new Criteria();
+			String provider = locationManager.getBestProvider(criteria, false);
+			Location myLocation = locationManager.getLastKnownLocation(provider);
+
+
+
+			// Initialize the location fields
+			if (myLocation != null) {
+				//   Toast.makeText(this, "Selected Provider " + provider,
+				//  Toast.LENGTH_SHORT).show();
+				onLocationChanged(myLocation);
+			} else {
+
+				//do something
+			}
+			String test = "Dernière position connue:" + getAddress(myLocation.getLatitude(),myLocation.getLongitude());
+			Toast.makeText(context, test, Toast.LENGTH_SHORT).show();
+
+
+			return myLocation;
 		}
-
-		LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-		// Define the criteria how to select the locatioin provider -> use
-		// default
-		Criteria criteria = new Criteria();
-		String provider = locationManager.getBestProvider(criteria, false);
-		Location myLocation = locationManager.getLastKnownLocation(provider);
-
-
-
-		// Initialize the location fields
-		if (myLocation != null) {
-			//   Toast.makeText(this, "Selected Provider " + provider,
-			//  Toast.LENGTH_SHORT).show();
-			onLocationChanged(myLocation);
-		} else {
-
-			//do something
+		else 
+		{
+			Toast.makeText(context, "pas de reseau", Toast.LENGTH_SHORT).show();
+			return null;
 		}
-		String test = "Dernière connue:" + getAddress(myLocation.getLatitude(),myLocation.getLongitude());
-		Toast.makeText(context, test, Toast.LENGTH_SHORT).show();
-
-
-		return myLocation;
 
 	}
 
@@ -114,26 +141,30 @@ public class gMap implements LocationListener, OnMapLongClickListener, OnInfoWin
 	{
 
 		Location myLoc = getMyLocation();
-		Location locationA = new Location("");
-		AbstractList<Store> storesList = new ArrayList<Store>();
+		if (myLoc != null)
+		{
+			Location locationA = new Location("");
+			AbstractList<Store> storesList = new ArrayList<Store>();
 
-		if(allstores != null) {
-			for(Store store : allstores) {
+			if(allstores != null) {
+				for(Store store : allstores) {
 
-				if(store != null)
-				{
-					locationA.setLatitude(store.getLatitude());
-					locationA.setLongitude(store.getLongitude());
+					if(store != null)
+					{
+						locationA.setLatitude(store.getLatitude());
+						locationA.setLongitude(store.getLongitude());
 
-					float distance = myLoc.distanceTo(locationA) / 1000;
+						float distance = myLoc.distanceTo(locationA) / 1000;
 
-					if (distance < 50.00)
-						storesList.add(store);
+						if (distance < 50.00)
+							storesList.add(store);
+					}
 				}
 			}
+			return storesList;
 		}
-
-		return storesList;
+		return null;
+		
 
 	}
 
