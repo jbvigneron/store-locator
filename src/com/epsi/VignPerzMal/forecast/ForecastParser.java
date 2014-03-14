@@ -1,8 +1,5 @@
 package com.epsi.VignPerzMal.forecast;
 
-import java.util.AbstractList;
-import java.util.ArrayList;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -26,7 +23,6 @@ class ForecastParser {
 
 			// Get current weather
 			JSONArray cwsJSON = root.getJSONArray(ForecastConstants.CURRENT_WEATHER);			
-
 			JSONObject cwJSON = cwsJSON.getJSONObject(0);
 
 			int humidity = cwJSON.getInt(ForecastConstants.HUMIDITY);
@@ -36,26 +32,17 @@ class ForecastParser {
 			int weather_code = cwJSON.getInt(ForecastConstants.WEATHER_CODE);
 			String weather_text = cwJSON.getString(ForecastConstants.WEATHER_TEXT);
 
-			// Get winds
-			AbstractList<Wind> winds = null;
+			// Get wind
 			JSONArray wsJSON = cwJSON.getJSONArray(ForecastConstants.WINDS);
+			JSONObject wJSON = wsJSON.getJSONObject(0);
 
-			winds = new ArrayList<Wind>();
+			String dir = wJSON.getString(ForecastConstants.DIR);
+			int speed = wJSON.getInt(ForecastConstants.SPEED);
+			String wind_unit = wJSON.getString(ForecastConstants.WIND_UNIT);
 
-			for(int j = 0; j < wsJSON.length(); j++) {
+			Wind wind = new Wind(dir, speed, wind_unit);
 
-				JSONObject wJSON = wsJSON.getJSONObject(j);
-
-				String dir = wJSON.getString(ForecastConstants.DIR);
-				int dir_degree = wJSON.getInt(ForecastConstants.DIR_DEGREE);
-				int speed = wJSON.getInt(ForecastConstants.SPEED);
-				String wind_unit = wJSON.getString(ForecastConstants.WIND_UNIT);
-
-				Wind wind = new Wind(dir, dir_degree, speed, wind_unit);
-				winds.add(wind);
-			}
-
-			currentWeather = new CurrentWeather(humidity, pressure, temp, temp_unit, weather_code, weather_text, winds);
+			currentWeather = new CurrentWeather(humidity, pressure, temp, temp_unit, weather_code, weather_text, wind);
 		}
 		catch(Exception e) {
 			e.printStackTrace();

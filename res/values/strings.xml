@@ -2,14 +2,10 @@
 <resources>
 
     <string name="app_name">StoreLocator</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_splash_screen">SplashScreen</string>
-    <string name="title_activity_single_contact">SingleContactActivity</string>
-    <string name="title_activity_data_overview">DataOverviewActivity</string>
-    <string name="title_activity_search">Search</string>
-    <string name="title_activity_display_store">DisplayStore</string>
-    <string name="title_activity_splash">Splash</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="title_activity_main">Rechercher un magasin</string>
+    <string name="title_activity_display_store">Infos sur le magasin</string>
+    <string name="title_activity_splash">Récupération des magasins</string>
 
     <string name="label_storename">Nom boutique</string>
     <string name="label_phone">Téléphone :</string>
@@ -17,19 +13,14 @@
     <string name="label_schedule">Horaires :</string>
     <string name="label_voicecall">Appeler le magasin</string>
     
+    <string name="label_name">Nom</string>
     <string name="label_forecast">Météo :</string>
-    
     <string name="label_zipcode">Code Postal</string>
-    
     <string name="label_search">Rechercher</string>
-    
     <string name="label_aroundme">Autour de moi</string>
-    
     <string name="label_list">Liste</string>
-    
     <string name="label_map">Carte</string>
     
     <string name="message_enter_zip_code">Entrez un code postal valide.</string>
     
-    <string name="label_name">nom</string>
 </resources>

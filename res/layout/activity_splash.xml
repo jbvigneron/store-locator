@@ -20,12 +20,12 @@
         android:layout_centerHorizontal="true" />
 
     <ImageView
-        android:id="@+id/imageView1"
         android:layout_width="458dp"
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="90dp"
+        android:contentDescription="@string/app_name"
         android:src="@drawable/titre" />
 
 </RelativeLayout>

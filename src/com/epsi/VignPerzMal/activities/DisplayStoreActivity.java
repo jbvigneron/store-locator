@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.epsi.VignPerzMal.forecast.ForecastFacade;
@@ -24,6 +25,7 @@ public class DisplayStoreActivity extends Activity implements OnClickListener {
 	private ImageButton imgVoiceCall;
 	private TextView tvSchedule;
 	private TextView tvForeCast;
+	private ProgressBar pbForecast;
 
 
 	private Store store;
@@ -33,6 +35,7 @@ public class DisplayStoreActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_display_store);
+		setTitle(R.string.title_activity_display_store);
 
 		// Get all activity controls
 		tvStoreName = (TextView) findViewById(R.id.tvStoreName);
@@ -41,6 +44,7 @@ public class DisplayStoreActivity extends Activity implements OnClickListener {
 		imgVoiceCall = (ImageButton) findViewById(R.id.imgVoiceCall);
 		tvSchedule = (TextView) findViewById(R.id.tvSchedule);
 		tvForeCast = (TextView) findViewById(R.id.tvForecast);
+		pbForecast = (ProgressBar) findViewById(R.id.pbForecast);
 
 		// Create events
 		imgVoiceCall.setOnClickListener(this);
@@ -61,7 +65,7 @@ public class DisplayStoreActivity extends Activity implements OnClickListener {
 		tvSchedule.setText(store.getSchedule().replace("<br />", "\n"));
 
 		AsyncTask<Double, Void, CurrentWeather> task = new ForecastAsyncTask();
-		//task.execute(store.getLatitude(), store.getLongitude());
+		task.execute(store.getLatitude(), store.getLongitude());
 	}
 
 	@Override
@@ -76,6 +80,14 @@ public class DisplayStoreActivity extends Activity implements OnClickListener {
 	class ForecastAsyncTask extends AsyncTask<Double, Void, CurrentWeather> {
 
 		@Override
+		protected void onPreExecute() {
+			
+			super.onPreExecute();
+			
+			pbForecast.setVisibility(View.VISIBLE);
+		}
+		
+		@Override
 		protected CurrentWeather doInBackground(Double... params) {
 			ForecastFacade facade = new ForecastFacade();
 			CurrentWeather weather = facade.get(params[0], params[1]);
@@ -85,8 +97,7 @@ public class DisplayStoreActivity extends Activity implements OnClickListener {
 		@Override
 		protected void onPostExecute(CurrentWeather result) {
 			tvForeCast.setText(result.toString());
-
-			// TODO: Hide loading ring
+			pbForecast.setVisibility(View.GONE);
 		}
 	}
 }

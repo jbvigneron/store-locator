@@ -56,8 +56,8 @@ public class Store implements Parcelable {
         this.phone = in.readString();
         this.schedule = in.readString();
         this.fax = in.readString();
-        this.latitude = in.readFloat();
-        this.longitude = in.readFloat();
+        this.latitude = in.readDouble();
+        this.longitude = in.readDouble();
     }
 
 	public int getId() {
