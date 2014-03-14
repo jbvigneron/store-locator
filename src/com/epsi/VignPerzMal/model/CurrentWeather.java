@@ -83,6 +83,12 @@ public class CurrentWeather
 
 	@Override
 	public String toString() {
-		return temp + "°" + temp_unit.toUpperCase(Locale.getDefault()) + " - " + weather_text;
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(temp);
+		stringBuilder.append("°");
+		stringBuilder.append(temp_unit.toUpperCase(Locale.getDefault()));
+		stringBuilder.append(" - ");
+		stringBuilder.append(weather_text);
+		return stringBuilder.toString();
 	}
 }
