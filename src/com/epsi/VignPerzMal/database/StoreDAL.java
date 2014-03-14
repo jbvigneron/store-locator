@@ -2,6 +2,8 @@ package com.epsi.VignPerzMal.database;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.TreeMap;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -16,7 +18,7 @@ public class StoreDAL extends DAL<Store> {
 		super(context);
 
 		columns = new String[]
-		{
+				{
 				StoreConstants.ID,
 				StoreConstants.CODEMAG,
 				StoreConstants.NAME,
@@ -28,7 +30,7 @@ public class StoreDAL extends DAL<Store> {
 				StoreConstants.FAX,
 				StoreConstants.LATITUDE,
 				StoreConstants.LONGITUDE
-		};
+				};
 	}
 
 	@Override
@@ -111,6 +113,14 @@ public class StoreDAL extends DAL<Store> {
 		return stores;
 	}
 
+
+
+	public AbstractList<Store> getNearestStores(TreeMap<Integer ,String> h) {
+		
+		h.keySet();
+		return null;
+
+	}
 	@Override
 	public AbstractList<Store> search(String zipCode) {
 
